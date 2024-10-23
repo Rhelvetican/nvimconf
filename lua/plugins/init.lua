@@ -161,7 +161,6 @@ return {
 
     {
         "stevearc/conform.nvim",
-        lazy = true,
         opts = require "plugins.configs.conform",
     },
 
@@ -242,5 +241,12 @@ return {
 
     {
         "ck-zhang/mistake.nvim"
+    },
+
+    {
+        "simrat39/inlay-hints.nvim",
+        opts = function ()
+            require("inlay-hints").setup({})
+        end
     },
 }
