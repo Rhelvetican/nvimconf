@@ -17,6 +17,10 @@ return {
 	},
 
 	{
+		"nvim-neotest/nvim-nio",
+	},
+
+	{
 		"akinsho/bufferline.nvim",
 		event = "BufReadPre",
 		opts = require("plugins.configs.bufferline"),
@@ -29,24 +33,17 @@ return {
 		end,
 	},
 
-	-- we use cmp plugin only when in insert mode
-	-- so lets lazyload it at InsertEnter event, to know all the events check h-events
-	-- completion , now all of these plugins are dependent on cmp, we load them after cmp
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			-- cmp sources
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp",
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lua",
-
-			--list of default snippets
 			"rafamadriz/friendly-snippets",
 
-			-- snippets engine
 			{
 				"L3MON4D3/LuaSnip",
 				config = function()
@@ -54,7 +51,6 @@ return {
 				end,
 			},
 
-			-- autopairs , autocompletes ()[] etc
 			{
 				"windwp/nvim-autopairs",
 				config = function()
@@ -67,8 +63,6 @@ return {
 			},
 		},
 
-		-- made opts a function cuz cmp config calls cmp module
-		-- and we lazyloaded cmp so we dont want that file to be read on startup!
 		opts = function()
 			---@diagnostic disable-next-line: different-requires
 			return require("plugins.configs.cmp")
@@ -92,6 +86,7 @@ return {
 
 	{
 		"stevearc/conform.nvim",
+		event = "BufWritePre",
 		opts = require("plugins.configs.conform"),
 	},
 
@@ -123,7 +118,6 @@ return {
 		end,
 	},
 
-	-- files finder etc
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
@@ -152,10 +146,51 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^5", -- Recommended
 		lazy = false, -- This plugin is already lazy
+		config = function()
+			local mason = require("mason-registry")
+			local codelldb = mason.get_package("codelldb")
+			local ext_path = codelldb:get_install_path() .. "/extension/"
+			local codelldb_path = ext_path .. "adapter/codelldb"
+			local liblldb_path = ext_path .. "lldb/lib/liblldb.dylib"
+
+			local cfg = require("rustaceanvim.config")
+
+			vim.g.rustaceanvim = {
+				dap = {
+					adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+				},
+			}
+		end,
 	},
 
 	{
 		"mfussenegger/nvim-dap",
+		config = function()
+			local dap, dapui = require("dap"), require("dapui")
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.close()
+			end
+		end,
+	},
+
+	{
+		"rcarriga/nvim-dap-ui",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"nvim-neotest/nvim-nio",
+		},
+		config = function()
+			require("dapui").setup()
+		end,
 	},
 
 	{
