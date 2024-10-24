@@ -22,8 +22,9 @@ map("v", "<leader>/", "gc", { remap = true })
 
 -- format
 map("n", "<leader>fm", function()
-    require("plugins.configs.conform").format()
+	require("plugins.configs.conform").format()
 end)
 
--- neotree
-map("n", "<C-t>", "<cmd> Neotree <CR>")
+-- oil.nvim
+map("n", "<C-o>", "<cmd> Oil <CR>")
+map("n", "<C-O>", "<cmd> Oil --float <CR>")

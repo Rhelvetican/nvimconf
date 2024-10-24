@@ -24,4 +24,8 @@ local plugins = require("plugins")
 require("lazy").setup(plugins, require("lazy_config"))
 
 vim.o.background = "dark"
-vim.cmd([[colorscheme rose-pine]])
+vim.cmd("colorscheme oxocarbon")
+
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
