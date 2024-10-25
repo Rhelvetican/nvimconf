@@ -23,6 +23,33 @@ local plugins = require("plugins")
 
 require("lazy").setup(plugins, require("lazy_config"))
 
+local sign = function(opts)
+	vim.fn.sign_define(opts.name, {
+		texth1 = opts.name,
+		text = opts.text,
+		numh1 = "",
+	})
+end
+
+sign({ name = "DiagnosticSignError", text = "" })
+sign({ name = "DiagnosticSignWarn", text = "" })
+sign({ name = "DiagnosticSignHint", text = "" })
+sign({ name = "DiagnosticSignInfo", text = "" })
+
+vim.diagnostic.config({
+	virtual_text = false,
+	signs = false,
+	update_in_insert = true,
+	underline = true,
+	severity_sort = true,
+	float = {
+		border = "rounded",
+		source = "always",
+		header = "",
+		prefix = "",
+	},
+})
+
 vim.o.background = "dark"
 vim.cmd("colorscheme oxocarbon")
 
