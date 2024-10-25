@@ -46,6 +46,43 @@ return {
 	},
 
 	{
+		"NeogitOrg/neogit",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"sindrets/diffview.nvim",
+			"nvim-telescope/telescope.nvim",
+		},
+
+		config = function()
+			vim.keymap.set("n", "<S-g>", "<cmd>Neogit<CR>")
+			vim.keymap.set("n", "<C-<S-g>>", "<cmd>Neogit commit<CR>")
+
+			require("neogit").setup({
+				console_timeout = 1000,
+				filewatcher = {
+					interval = 250,
+				},
+			})
+		end,
+	},
+
+	{
+		"nvim-neotest/neotest",
+		dependencies = {
+			"nvim-neotest/nvim-nio",
+			"nvim-lua/plenary.nvim",
+			"antoinemadec/FixCursorHold.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+
+		config = function()
+			require("neotest").setup({
+				require("rustaceanvim.neotest"),
+			})
+		end,
+	},
+
+	{
 		"akinsho/bufferline.nvim",
 		event = "BufReadPre",
 		opts = require("plugins.configs.bufferline"),
@@ -65,9 +102,11 @@ return {
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lua",
 			"rafamadriz/friendly-snippets",
+			"mrcjkb/rustaceanvim",
 
 			{
 				"L3MON4D3/LuaSnip",
@@ -170,7 +209,7 @@ return {
 				end,
 			})
 
-			vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+			vim.keymap.set("n", "<leader><C-a>", "<cmd>AerialToggle!<CR>")
 		end,
 	},
 
@@ -218,6 +257,10 @@ return {
 						require("hover.providers.diagnostic")
 						require("hover.providers.fold_preview")
 					end,
+
+					preview_opts = {
+						border = "rounded",
+					},
 
 					mouse_delay = 250,
 				},
