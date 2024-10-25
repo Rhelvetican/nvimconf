@@ -9,6 +9,18 @@ return {
 	},
 
 	{
+		"sample-usr/rakis.nvim",
+		lazy = false,
+		priority = 9999,
+		opts = function()
+			require("rakis").setup({
+				transparent = true,
+				italic_comments = true,
+			})
+		end,
+	},
+
+	{
 		"rmagatti/auto-session",
 		lazy = false,
 
@@ -144,13 +156,32 @@ return {
 	},
 
 	{
+		"stevearc/aerial.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = function()
+			require("aerial").setup({
+				filter_kind = false,
+				on_attach = function()
+					vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+					vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+				end,
+			})
+
+			vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+		end,
+	},
+
+	{
 		"IogaMaster/neocord",
 		event = "VeryLazy",
 		config = function()
 			require("neocord").setup({
 				logo = "auto",
 				logo_tooltip = "NEOVIM /// REPRISE",
-				log_level = "info",
+				log_level = nil,
 			})
 		end,
 	},

@@ -23,6 +23,13 @@ local plugins = require("plugins")
 
 require("lazy").setup(plugins, require("lazy_config"))
 
+if vim.g.neovide then
+	vim.g.neovide_floating_corner_radius = 0.25
+	vim.g.neovide_floating_blur_amount_x = 1.5
+	vim.g.neovide_floating_blur_amount_y = 1.5
+	vim.g.neovide_cursor_vfx_mode = "railgun"
+end
+
 local sign = function(opts)
 	vim.fn.sign_define(opts.name, {
 		texth1 = opts.name,
@@ -37,7 +44,7 @@ sign({ name = "DiagnosticSignHint", text = "" })
 sign({ name = "DiagnosticSignInfo", text = "" })
 
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 	signs = false,
 	update_in_insert = true,
 	underline = true,
@@ -45,13 +52,11 @@ vim.diagnostic.config({
 	float = {
 		border = "rounded",
 		source = "always",
-		header = "",
-		prefix = "",
 	},
 })
 
 vim.o.background = "dark"
-vim.cmd("colorscheme oxocarbon")
+vim.cmd("colorscheme rakis")
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

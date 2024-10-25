@@ -1,6 +1,7 @@
 {
   "LuaSnip": { "branch": "master", "commit": "ac7cbc0e85710db7cba6510b1d8e6a1a551444f7" },
   "actions-preview.nvim": { "branch": "master", "commit": "9f52a01c374318e91337697ebed51c6fae57f8a4" },
+  "aerial.nvim": { "branch": "master", "commit": "60a784614acb1d7695bd9ae0fee8ada1bf7b0c28" },
   "auto-session": { "branch": "main", "commit": "3cd531ce4d46fb156268ddedf5f3e6822ef26af7" },
   "bufferline.nvim": { "branch": "main", "commit": "5c528bee3dd797d5bd6bae5f229411939b25b203" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
@@ -31,6 +32,7 @@
   "oil.nvim": { "branch": "master", "commit": "39dbf875861449cf09e936fa80073f3413e9439c" },
   "oxocarbon.nvim": { "branch": "main", "commit": "004777819ba294423b638a35a75c9f0c7be758ed" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
+  "rakis.nvim": { "branch": "main", "commit": "f74ba1472f9c20b62b28b53a467352ab8a971ca8" },
   "rustaceanvim": { "branch": "master", "commit": "6eb1c41463a0ad02a4fe799321cc7f651b87e576" },
   "telescope.nvim": { "branch": "master", "commit": "df534c3042572fb958586facd02841e10186707c" }
 }
