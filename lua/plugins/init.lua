@@ -5,18 +5,44 @@ return {
 	},
 
 	{
-		"nyoom-engineering/oxocarbon.nvim",
+		"stevearc/dressing.nvim",
+		opts = function()
+			require("dressing").setup({})
+		end,
 	},
 
 	{
 		"sample-usr/rakis.nvim",
 		lazy = false,
-		priority = 9999,
+		priority = 9998,
 		opts = function()
 			require("rakis").setup({
 				transparent = true,
 				italic_comments = true,
 			})
+		end,
+	},
+
+	{
+		"ribru17/bamboo.nvim",
+		lazy = false,
+		priority = 9999,
+
+		config = function()
+			require("bamboo").setup({
+				style = "multiplex",
+				transparent = true,
+			})
+
+			require("bamboo").load()
+		end,
+	},
+
+	{
+		"HiPhish/rainbow-delimiters.nvim",
+
+		config = function()
+			require("rainbow-delimiters.setup").setup({})
 		end,
 	},
 
@@ -38,6 +64,15 @@ return {
 		build = ":TSUpdate",
 		config = function()
 			require("plugins.configs.treesitter")
+		end,
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+
+		config = function()
+			require("treesitter-context").setup()
 		end,
 	},
 
