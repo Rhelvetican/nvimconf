@@ -367,6 +367,11 @@ return {
 					"icon",
 					"permissions",
 				},
+				view_options = {
+					is_hidden_file = function(name, buffer)
+						return vim.startswith(name, ".") and not vim.startswith(name, ".git")
+					end
+				},
 			})
 		end,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
