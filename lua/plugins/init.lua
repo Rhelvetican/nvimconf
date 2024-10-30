@@ -12,34 +12,8 @@ return {
 	},
 
 	{
-		"ribru17/bamboo.nvim",
-		lazy = false,
-		priority = 9999,
-
-		config = function()
-			require("bamboo").setup({
-				style = "multiplex",
-				transparent = true,
-			})
-
-			require("bamboo").load()
-		end,
-	},
-
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		config = function()
-			require("catppuccin").setup({
-				flavor = "mocha",
-				styles = {
-					functions = { "italic" },
-					variables = { "italic" },
-					types = { "italic" },
-				},
-			})
-		end,
+		"mellow-theme/mellow.nvim",
+		opts = function() end,
 	},
 
 	{
@@ -242,6 +216,19 @@ return {
 
 			vim.keymap.set("n", "<leader><C-a>", "<cmd>AerialToggle!<CR>")
 		end,
+	},
+
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		opts = {
+			-- configurations go here
+		},
 	},
 
 	{
