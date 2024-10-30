@@ -56,4 +56,4 @@ vim.diagnostic.config({
 })
 
 vim.o.background = "dark"
-vim.cmd("colorscheme bamboo")
+vim.cmd("colorscheme catppuccin")

@@ -12,18 +12,6 @@ return {
 	},
 
 	{
-		"sample-usr/rakis.nvim",
-		lazy = false,
-		priority = 9998,
-		opts = function()
-			require("rakis").setup({
-				transparent = true,
-				italic_comments = true,
-			})
-		end,
-	},
-
-	{
 		"ribru17/bamboo.nvim",
 		lazy = false,
 		priority = 9999,
@@ -35,6 +23,22 @@ return {
 			})
 
 			require("bamboo").load()
+		end,
+	},
+
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({
+				flavor = "mocha",
+				styles = {
+					functions = { "italic" },
+					variables = { "italic" },
+					types = { "italic" },
+				},
+			})
 		end,
 	},
 
@@ -370,7 +374,7 @@ return {
 				view_options = {
 					is_hidden_file = function(name, buffer)
 						return vim.startswith(name, ".") and not vim.startswith(name, ".git")
-					end
+					end,
 				},
 			})
 		end,
