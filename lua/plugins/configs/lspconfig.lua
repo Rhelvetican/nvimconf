@@ -1,8 +1,7 @@
 -- Use LspAttach autocommand to only map the following keys
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
 	callback = function(ev)
-		-- Enable completion triggered by <c-x><c-o>
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
 		local opts = { buffer = ev.buf }
@@ -20,6 +19,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+		if client == nil then
+			return
+		end
+
+		if client.name == "ruff" then
+			client.server_capabilities.hoverProvider = false
+		end
 	end,
 })
 
@@ -50,6 +59,22 @@ lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {
 			diagnostics = { globals = { "vim" } },
+		},
+	},
+})
+
+lspconfig.ruff.setup({})
+
+lspconfig.basedpyright.setup({
+	settings = {
+		basedpyright = {
+			disableOrganizeImports = true,
+			typeCheckingMode = "off",
+		},
+		python = {
+			analysis = {
+				ignore = { "*" },
+			},
 		},
 	},
 })

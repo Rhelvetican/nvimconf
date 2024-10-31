@@ -43,6 +43,8 @@ sign({ name = "DiagnosticSignWarn", text = "" })
 sign({ name = "DiagnosticSignHint", text = "" })
 sign({ name = "DiagnosticSignInfo", text = "" })
 
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 vim.diagnostic.config({
 	virtual_text = true,
 	signs = false,
@@ -54,6 +56,8 @@ vim.diagnostic.config({
 		source = "always",
 	},
 })
+
+vim.wo.relativenumber = true
 
 vim.o.background = "dark"
 

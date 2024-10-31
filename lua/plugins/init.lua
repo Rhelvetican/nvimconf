@@ -13,7 +13,6 @@ return {
 
 	{
 		"mellow-theme/mellow.nvim",
-		opts = function() end,
 	},
 
 	{
@@ -142,7 +141,12 @@ return {
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
 		cmd = { "Mason", "MasonInstall" },
-		opts = {},
+		opts = {
+			ensure_installed = {
+				"ruff",
+				"basedpyright",
+			},
+		},
 	},
 
 	{
@@ -316,6 +320,15 @@ return {
 	},
 
 	{
+		"mfussenegger/nvim-dap-python",
+		ft = "python",
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
+		},
+	},
+
+	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = {
 			"mfussenegger/nvim-dap",
@@ -329,6 +342,9 @@ return {
 	{
 		"saecki/crates.nvim",
 		tag = "stable",
+		dependencies = {
+			"nvimtools/none-ls.nvim",
+		},
 		config = function()
 			require("crates").setup({
 				lsp = {
