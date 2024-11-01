@@ -29,7 +29,6 @@ return {
 					"dap",
 					"neogit",
 					"neotest",
-					"nvim-cmp",
 					"nvim-web-devicons",
 				},
 
@@ -123,41 +122,39 @@ return {
 	},
 
 	{
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-nvim-lua",
-			"rafamadriz/friendly-snippets",
-			"mrcjkb/rustaceanvim",
+		"saghen/blink.cmp",
+		lazy = false,
 
-			{
-				"L3MON4D3/LuaSnip",
-				config = function()
-					require("luasnip.loaders.from_vscode").lazy_load()
-				end,
+		opts = {
+			keymap = {
+				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				["<C-e>"] = { "hide" },
+				["<CR>"] = { "accept", "fallback" },
+
+				["<Tab>"] = { "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "snippet_backward", "fallback" },
+
+				["<Up>"] = { "select_prev", "fallback" },
+				["<Down>"] = { "select_next", "fallback" },
+				["<C-p>"] = { "select_prev", "fallback" },
+				["<C-n>"] = { "select_next", "fallback" },
+
+				["<C-b>"] = { "scroll_documentation_up", "fallback" },
+				["<C-f>"] = { "scroll_documentation_down", "fallback" },
 			},
 
-			{
-				"windwp/nvim-autopairs",
-				config = function()
-					require("nvim-autopairs").setup()
+			highlight = {
+				use_nvim_cmp_as_default = true,
+			},
 
-					local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-					local cmp = require("cmp")
-					cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-				end,
+			nerd_font_variant = "mono",
+
+			windows = {
+				documentation = {
+					auto_show = true,
+				},
 			},
 		},
-
-		opts = function()
-			---@diagnostic disable-next-line: different-requires
-			return require("plugins.configs.cmp")
-		end,
 	},
 
 	{
@@ -175,6 +172,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = { "saghen/blink.cmp" },
 		config = function()
 			require("plugins.configs.lspconfig")
 		end,
