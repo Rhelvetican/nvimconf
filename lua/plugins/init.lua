@@ -16,6 +16,33 @@ return {
 	},
 
 	{
+		"marko-cerovac/material.nvim",
+
+		opts = function()
+			vim.g.material_style = "deep ocean"
+
+			require("material").setup({
+				style = {
+					keywords = { italic = true },
+					functions = { italic = true },
+					variables = { italic = true },
+					types = { italic = true },
+				},
+
+				plugins = {
+					"dap",
+					"neogit",
+					"neotest",
+					"nvim-cmp",
+					"nvim-web-devicons",
+				},
+
+				lualine_style = "stealth",
+			})
+		end,
+	},
+
+	{
 		"rmagatti/auto-session",
 		lazy = false,
 
