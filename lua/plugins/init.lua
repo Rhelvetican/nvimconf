@@ -12,10 +12,6 @@ return {
 	},
 
 	{
-		"mellow-theme/mellow.nvim",
-	},
-
-	{
 		"marko-cerovac/material.nvim",
 
 		opts = function()
