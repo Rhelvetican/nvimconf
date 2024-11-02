@@ -125,6 +125,10 @@ return {
 		"saghen/blink.cmp",
 		lazy = false,
 
+		version = "v0.*",
+
+		dependencies = { "rafamadriz/friendly-snippets" },
+
 		opts = {
 			keymap = {
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
@@ -154,6 +158,8 @@ return {
 					auto_show = true,
 				},
 			},
+
+			accept = { auto_brackets = { enabled = true } },
 		},
 	},
 
