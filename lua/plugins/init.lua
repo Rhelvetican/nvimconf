@@ -127,7 +127,12 @@ return {
 
 		version = "v0.*",
 
-		dependencies = { "rafamadriz/friendly-snippets" },
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			"saghen/blink.compat",
+			"hrsh7th/cmp-nvim-lua",
+			"mrcjkb/rustaceanvim",
+		},
 
 		opts = {
 			keymap = {
@@ -160,6 +165,7 @@ return {
 			},
 
 			accept = { auto_brackets = { enabled = true } },
+			trigger = { signature_help = { enabled = true } },
 		},
 	},
 
@@ -255,21 +261,41 @@ return {
 		version = "*",
 		dependencies = {
 			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons", -- optional dependency
+			"nvim-tree/nvim-web-devicons",
 		},
-		opts = {
-			-- configurations go here
-		},
+		opts = {},
 	},
 
 	{
-		"IogaMaster/neocord",
+		"vyfor/cord.nvim",
+		build = "./build or .\\build",
 		event = "VeryLazy",
-		config = function()
-			require("neocord").setup({
-				logo = "auto",
-				logo_tooltip = "NEOVIM /// REPRISE",
-				log_level = nil,
+		opts = function()
+			require("cord").setup({
+				editor = {
+					client = "neovim",
+					tooltip = "The Superior Text Editor",
+				},
+
+				display = {
+					show_repository = false,
+				},
+
+				lsp = {
+					show_problem_count = true,
+					severity = 2,
+				},
+
+				text = {
+					workspace = "Working on {}",
+				},
+
+				buttons = {
+					{
+						label = "View Plugin",
+						url = "https://github.com/vyfor/cord.nvim",
+					},
+				},
 			})
 		end,
 	},
