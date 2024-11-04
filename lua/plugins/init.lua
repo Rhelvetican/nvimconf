@@ -123,15 +123,16 @@ return {
 	},
 
 	{
-		"hrsh7th/nvim-cmp",
+		"iguanacucumber/magazine.nvim",
+		name = "nvim-cmp",
 		event = "InsertEnter",
+
 		dependencies = {
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"saadparwaiz1/cmp_luasnip",
-			"hrsh7th/cmp-nvim-lua",
+			{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
+			{ "iguanacucumber/mag-nvim-lua", name = "cmp-nvim-lua" },
+			{ "iguanacucumber/mag-buffer", name = "cmp-buffer" },
+			{ "iguanacucumber/mag-cmdline", name = "cmp-cmdline" },
+			"https://codeberg.org/FelipeLema/cmp-async-path",
 			"rafamadriz/friendly-snippets",
 			"mrcjkb/rustaceanvim",
 			{
@@ -152,6 +153,7 @@ return {
 				end,
 			},
 		},
+
 		opts = function()
 			---@diagnostic disable-next-line: different-requires
 			return require("plugins.configs.cmp")
@@ -173,7 +175,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
-		dependencies = { "saghen/blink.cmp" },
 		config = function()
 			require("plugins.configs.lspconfig")
 		end,
