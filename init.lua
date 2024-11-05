@@ -64,4 +64,4 @@ vim.o.background = "dark"
 vim.g.mellow_italic_functions = true
 vim.g.mellow_italic_variables = true
 
-vim.cmd("colorscheme material")
+vim.cmd("colorscheme flexoki-dark")
