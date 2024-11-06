@@ -47,6 +47,8 @@ return {
 		"nvim-neotest/nvim-nio",
 	},
 
+
+
 	{
 		"NeogitOrg/neogit",
 		dependencies = {
@@ -105,8 +107,8 @@ return {
 		dependencies = {
 			{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
 			{ "iguanacucumber/mag-nvim-lua", name = "cmp-nvim-lua" },
-			{ "iguanacucumber/mag-buffer", name = "cmp-buffer" },
-			{ "iguanacucumber/mag-cmdline", name = "cmp-cmdline" },
+			{ "iguanacucumber/mag-buffer",   name = "cmp-buffer" },
+			{ "iguanacucumber/mag-cmdline",  name = "cmp-cmdline" },
 			"https://codeberg.org/FelipeLema/cmp-async-path",
 			"rafamadriz/friendly-snippets",
 			"mrcjkb/rustaceanvim",
