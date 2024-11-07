@@ -1,8 +1,12 @@
+local map = vim.keymap.set
+
+
 return {
-    defaults = {
-        sorting_strategy = "ascending",
-        layout_config = {
-            horizontal = { prompt_position = "top" },
-        },
-    },
+	defaults = {
+		sorting_strategy = "ascending",
+
+		layout_config = {
+			horizontal = { prompt_position = "top" },
+		},
+	},
 }

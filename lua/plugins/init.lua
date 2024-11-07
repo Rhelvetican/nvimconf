@@ -27,6 +27,24 @@ return {
 	},
 
 	{
+		"nvzone/menu",
+		dependencies = { { "nvzone/volt", lazy = true } },
+		config = function()
+			local map = vim.keymap.set
+
+			map("n", "<C-j>", function()
+				require("menu").open("default")
+			end, {})
+
+			map("n", "<RightMouse>", function()
+				vim.cmd.exec("'normal! \\<RightMouse>'")
+				local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
+				require("menu").open(options, { mouse = true })
+			end)
+		end,
+	},
+
+	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
@@ -212,7 +230,20 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		opts = require("plugins.configs.telescope"),
+		dependencies = {
+			{ "nvim-telescope/telescope-ui-select.nvim" },
+		},
+		opts = function()
+			require("telescope").setup({
+				extensions = {
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown({}),
+					},
+				},
+			})
+
+			require("telescope").load_extension("ui-select")
+		end,
 	},
 
 	{
