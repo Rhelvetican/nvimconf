@@ -24,6 +24,8 @@ local plugins = require("plugins")
 require("lazy").setup(plugins, require("lazy_config"))
 
 if vim.g.neovide then
+	vim.opt.linespace = -3
+
 	vim.g.neovide_floating_corner_radius = 0.25
 	vim.g.neovide_floating_blur_amount_x = 1.5
 	vim.g.neovide_floating_blur_amount_y = 1.5
