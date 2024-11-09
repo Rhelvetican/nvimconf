@@ -26,9 +26,11 @@ return {
 		},
 	},
 
+	{ "nvzone/volt", lazy = true },
+
 	{
 		"nvzone/menu",
-		dependencies = { { "nvzone/volt", lazy = true } },
+		dependencies = {},
 		config = function()
 			local map = vim.keymap.set
 
@@ -42,6 +44,11 @@ return {
 				require("menu").open(options, { mouse = true })
 			end)
 		end,
+	},
+
+	{
+		"nvzone/minty",
+		cmd = { "Shades", "Huefy" },
 	},
 
 	{
@@ -223,7 +230,16 @@ return {
 				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
 			end)
 
-			require("ibl").setup({ indent = { highlight = highlight } })
+			require("ibl").setup({ indent = { highlight = highlight, char = "│" } })
+		end,
+	},
+
+	{
+		"folke/which-key.nvim",
+		keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
+		cmd = "WhichKey",
+		opts = function()
+			return {}
 		end,
 	},
 
@@ -233,17 +249,26 @@ return {
 		dependencies = {
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 		},
-		opts = function()
-			require("telescope").setup({
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
+		opts = {
+			defaults = {
+				prompt_prefix = "   ",
+				selection_caret = " ",
+				entry_prefix = " ",
+				sorting_strategy = "ascending",
+				layout_config = {
+					horizontal = {
+						prompt_position = "top",
+						preview_width = 0.55,
 					},
+					width = 0.87,
+					height = 0.80,
 				},
-			})
+				mappings = {},
+			},
 
-			require("telescope").load_extension("ui-select")
-		end,
+			extensions_list = { "themes", "terms" },
+			extensions = {},
+		},
 	},
 
 	{
@@ -353,7 +378,7 @@ return {
 						border = "rounded",
 					},
 
-					mouse_delay = 250,
+					-- mouse_delay = 250,
 				},
 
 				vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" }),

@@ -1,4 +1,5 @@
 local o = vim.o
+local g = vim.g
 
 vim.g.mapleader = " "
 
@@ -29,6 +30,10 @@ o.termguicolors = true
 o.timeoutlen = 400
 o.undofile = true
 o.cursorline = true
+
+g.loaded_node_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_ruby_provider = 0
 
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"
