@@ -26,6 +26,8 @@ return {
 		},
 	},
 
+	{ "lunarvim/lunar.nvim" },
+
 	{ "nvzone/volt", lazy = true },
 
 	{
@@ -44,11 +46,6 @@ return {
 				require("menu").open(options, { mouse = true })
 			end)
 		end,
-	},
-
-	{
-		"nvzone/minty",
-		cmd = { "Shades", "Huefy" },
 	},
 
 	{
@@ -343,8 +340,8 @@ return {
 
 	{
 		"mrcjkb/rustaceanvim",
-		version = "^5", -- Recommended
-		lazy = false, -- This plugin is already lazy
+		version = "^5",
+		lazy = false,
 		config = function()
 			local mason = require("mason-registry")
 			local codelldb = mason.get_package("codelldb")
