@@ -16,7 +16,7 @@
   "crates.nvim": { "branch": "main", "commit": "1c924d5a9ea3496c4e1a02d0d51388ba809f8468" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "dressing.nvim": { "branch": "master", "commit": "43b8f74e0b1e3f41e51f640f8efa3bcd401cea0d" },
-  "flexoki": { "branch": "main", "commit": "975654bce67514114db89373539621cff42befb5" },
+  "everforest-nvim": { "branch": "main", "commit": "8bcf03cbbbcd28ad62c7cdc169f43fec8bbf14f3" },
   "friendly-snippets": { "branch": "main", "commit": "de8fce94985873666bd9712ea3e49ee17aadb1ed" },
   "gitsigns.nvim": { "branch": "main", "commit": "4daf7022f1481edf1e8fb9947df13bb07c18e89a" },
   "hover.nvim": { "branch": "main", "commit": "f8e162daccb2f117e19f3d5ad3647ac0cefb02e3" },
