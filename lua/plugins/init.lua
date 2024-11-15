@@ -78,26 +78,7 @@ return {
 		"nvim-neotest/nvim-nio",
 	},
 
-	{
-		"NeogitOrg/neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"sindrets/diffview.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-
-		config = function()
-			vim.keymap.set("n", "<S-g>", "<cmd>Neogit<CR>")
-			vim.keymap.set("n", "<C-<S-g>>", "<cmd>Neogit commit<CR>")
-
-			require("neogit").setup({
-				console_timeout = 1000,
-				filewatcher = {
-					interval = 250,
-				},
-			})
-		end,
-	},
+	"tpope/vim-fugitive",
 
 	{
 		"nvim-neotest/neotest",
