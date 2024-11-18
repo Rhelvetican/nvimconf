@@ -48,7 +48,7 @@ sign({ name = "DiagnosticSignInfo", text = "" })
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 	signs = true,
 	update_in_insert = true,
 	underline = true,
@@ -66,4 +66,6 @@ vim.o.background = "dark"
 vim.g.mellow_italic_functions = true
 vim.g.mellow_italic_variables = true
 
-vim.cmd("colorscheme flexoki-dark")
+vim.g.material_style = "deep ocean"
+
+vim.cmd("colorscheme material")

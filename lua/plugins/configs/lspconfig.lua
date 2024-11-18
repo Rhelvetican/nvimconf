@@ -54,7 +54,7 @@ capabilities.textDocument.completion.completionItem = {
 
 local lspconfig = require("lspconfig")
 
-lspconfig.lua_ls.setup({
+lspconfig.lua_language_server.setup({
 	capabilities = capabilities,
 	settings = {
 		Lua = {

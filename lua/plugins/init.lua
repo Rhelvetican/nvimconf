@@ -11,8 +11,6 @@ return {
 		end,
 	},
 
-	{ "kepano/flexoki-neovim", name = "flexoki" },
-
 	{
 		"rmagatti/auto-session",
 		lazy = false,
@@ -25,7 +23,29 @@ return {
 		},
 	},
 
-	{ "lunarvim/lunar.nvim" },
+	{
+		"marko-cerovac/material.nvim",
+		opts = function()
+			require("material").setup({
+				styles = {
+					keywords = { italic = true },
+					variables = { italic = true },
+					types = { italic = true },
+				},
+
+				plugins = {
+					"dap",
+					"fidget",
+					"indent-blankline",
+					"lspsaga",
+					"nvim-web-devicons",
+					"nvim-cmp",
+					"telescope",
+					"which-key",
+				},
+			})
+		end,
+	},
 
 	{ "nvzone/volt", lazy = true },
 
@@ -148,6 +168,22 @@ return {
 	},
 
 	{
+		"nvimdev/lspsaga.nvim",
+
+		event = "LspAttach",
+
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+
+		config = function()
+			require("lspsaga").setup({})
+		end,
+	},
+
+	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
 		cmd = { "Mason", "MasonInstall" },
@@ -161,6 +197,9 @@ return {
 
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = {
+			"j-hui/fidget.nvim",
+		},
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("plugins.configs.lspconfig")
@@ -284,17 +323,6 @@ return {
 	},
 
 	{
-		"utilyre/barbecue.nvim",
-		name = "barbecue",
-		version = "*",
-		dependencies = {
-			"SmiteshP/nvim-navic",
-			"nvim-tree/nvim-web-devicons",
-		},
-		opts = {},
-	},
-
-	{
 		"vyfor/cord.nvim",
 		build = "./build or .\\build",
 		event = "VeryLazy",
@@ -355,9 +383,9 @@ return {
 			require("hover").setup(
 				{
 					init = function()
+						require("hover.providers.diagnostic")
 						require("hover.providers.lsp")
 						require("hover.providers.dap")
-						require("hover.providers.diagnostic")
 						require("hover.providers.fold_preview")
 					end,
 
