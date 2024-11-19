@@ -37,13 +37,51 @@ return {
 					"dap",
 					"fidget",
 					"indent-blankline",
+					"nvim-cmp",
 					"lspsaga",
 					"nvim-web-devicons",
-					"nvim-cmp",
 					"telescope",
 					"which-key",
 				},
 			})
+		end,
+	},
+
+	{
+		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lua",
+			"rafamadriz/friendly-snippets",
+			"mrcjkb/rustaceanvim",
+			"https://codeberg.org/FelipeLema/cmp-async-path",
+
+			{
+				"L3MON4D3/LuaSnip",
+				config = function()
+					require("luasnip.loaders.from_vscode").lazy_load()
+				end,
+			},
+
+			{
+				"windwp/nvim-autopairs",
+				config = function()
+					require("nvim-autopairs").setup()
+
+					local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+					local cmp = require("cmp")
+					cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+				end,
+			},
+		},
+		opts = function()
+			---@diagnostic disable-next-line: different-requires
+			return require("plugins.configs.cmp")
 		end,
 	},
 
@@ -72,6 +110,7 @@ return {
 		ft = "lua",
 		opts = {
 			library = {
+				"lazy.nvim",
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 			},
 		},
@@ -130,41 +169,7 @@ return {
 	},
 
 	{
-		"iguanacucumber/magazine.nvim",
-		name = "nvim-cmp",
-		event = "InsertEnter",
-
-		dependencies = {
-			{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
-			{ "iguanacucumber/mag-nvim-lua", name = "cmp-nvim-lua" },
-			{ "iguanacucumber/mag-buffer", name = "cmp-buffer" },
-			{ "iguanacucumber/mag-cmdline", name = "cmp-cmdline" },
-			"https://codeberg.org/FelipeLema/cmp-async-path",
-			"rafamadriz/friendly-snippets",
-			"mrcjkb/rustaceanvim",
-			{
-				"L3MON4D3/LuaSnip",
-				config = function()
-					require("luasnip.loaders.from_vscode").lazy_load()
-				end,
-			},
-
-			{
-				"windwp/nvim-autopairs",
-				config = function()
-					require("nvim-autopairs").setup()
-
-					local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-					local cmp = require("cmp")
-					cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-				end,
-			},
-		},
-
-		opts = function()
-			---@diagnostic disable-next-line: different-requires
-			return require("plugins.configs.cmp")
-		end,
+		"ms-jpq/coq_nvim",
 	},
 
 	{
