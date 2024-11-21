@@ -4,7 +4,7 @@ vim.g.mapleader = "."
 
 -- general mappings
 map("n", "<C-s>", "<cmd> w <CR>")
-map("n", "g?", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
+map("n", "g?", "<cmd>lua vim.diagnostic.open_float()<CR>")
 map("i", "jk", "<ESC>")
 map("n", "<C-c>", "<cmd> %y+ <CR>") -- copy whole filecontent
 

@@ -169,10 +169,6 @@ return {
 	},
 
 	{
-		"ms-jpq/coq_nvim",
-	},
-
-	{
 		"nvimdev/lspsaga.nvim",
 
 		event = "LspAttach",
@@ -184,6 +180,9 @@ return {
 		},
 
 		config = function()
+			local map = vim.keymap.set
+			map("n", ".c", "<cmd>Lspsaga code_action<CR>")
+
 			require("lspsaga").setup({})
 		end,
 	},
@@ -385,32 +384,32 @@ return {
 	{
 		"lewis6991/hover.nvim",
 		config = function()
-			require("hover").setup(
-				{
-					init = function()
-						require("hover.providers.diagnostic")
-						require("hover.providers.lsp")
-						require("hover.providers.dap")
-						require("hover.providers.fold_preview")
-					end,
+			vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
 
-					preview_opts = {
-						border = "rounded",
-					},
+			vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
 
-					-- mouse_delay = 250,
+			vim.keymap.set("n", "<C-p>", function()
+				require("hover").hover_switch("previous", {})
+			end, { desc = "hover.nvim (previous source)" })
+
+			vim.keymap.set("n", "<C-n>", function()
+				require("hover").hover_switch("next", {})
+			end, { desc = "hover.nvim (next source)" })
+
+			vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
+
+			require("hover").setup({
+				init = function()
+					require("hover.providers.diagnostic")
+					require("hover.providers.lsp")
+					require("hover.providers.dap")
+					require("hover.providers.fold_preview")
+				end,
+
+				preview_opts = {
+					border = "rounded",
 				},
-
-				vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" }),
-				vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" }),
-				vim.keymap.set("n", "<C-p>", function()
-					require("hover").hover_switch("previous")
-				end, { desc = "hover.nvim (previous source)" }),
-				vim.keymap.set("n", "<C-n>", function()
-					require("hover").hover_switch("next")
-				end, { desc = "hover.nvim (next source)" }),
-				vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
-			)
+			})
 		end,
 	},
 
@@ -475,13 +474,23 @@ return {
 		"stevearc/oil.nvim",
 		opts = function()
 			require("oil").setup({
-				default_file_explorer = false,
+				default_file_explorer = true,
+
 				columns = {
 					"icon",
 					"permissions",
+					"size",
 				},
+
+				win_options = {
+					wrap = true,
+				},
+
 				view_options = {
 					show_hidden = true,
+					is_hidden_file = function(name, _)
+						return name ~= ".gitignore" and name:sub(1, #".") ~= "."
+					end,
 				},
 			})
 		end,
