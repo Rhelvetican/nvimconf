@@ -52,6 +52,12 @@ capabilities.textDocument.completion.completionItem = {
 	},
 }
 
+capabilities.textDocument.semanticTokens = {
+	dynamicRegistration = true,
+	augmentsSyntaxTokens = true,
+	multilineTokenSupport = true,
+}
+
 local lspconfig = require("lspconfig")
 
 lspconfig.lua_ls.setup({

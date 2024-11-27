@@ -364,6 +364,9 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^5",
 		lazy = false,
+		dependencies = {
+			"rust-lang/rust.vim",
+		},
 		config = function()
 			local mason = require("mason-registry")
 			local codelldb = mason.get_package("codelldb")
@@ -472,6 +475,7 @@ return {
 
 	{
 		"stevearc/oil.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = function()
 			require("oil").setup({
 				default_file_explorer = true,
@@ -494,7 +498,6 @@ return {
 				},
 			})
 		end,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
 	{
