@@ -5,7 +5,6 @@ vim.g.mapleader = "."
 -- general mappings
 map("n", "<C-s>", "<cmd> w <CR>")
 map("n", "g?", "<cmd>lua vim.diagnostic.open_float()<CR>")
-map("i", "jk", "<ESC>")
 map("n", "<C-c>", "<cmd> %y+ <CR>") -- copy whole filecontent
 
 -- telescope
@@ -31,3 +30,6 @@ end)
 -- oil.nvim
 map("n", "<C-o>", "<cmd> Oil <CR>")
 map("n", "<C-O>", "<cmd> Oil --float <CR>")
+
+-- lazy.nvim
+map("n", "<C-l>", "<cmd> Lazy <CR>")
