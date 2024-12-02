@@ -48,14 +48,8 @@ sign({ name = "DiagnosticSignInfo", text = "" })
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.diagnostic.config({
-	signs = true,
-	update_in_insert = true,
 	underline = true,
 	severity_sort = true,
-	float = {
-		show_header = true,
-		border = "rounded",
-	},
 })
 
 vim.wo.relativenumber = true
