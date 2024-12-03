@@ -48,6 +48,7 @@ sign({ name = "DiagnosticSignInfo", text = "" })
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.diagnostic.config({
+	virtual_text = false,
 	underline = true,
 	severity_sort = true,
 })
