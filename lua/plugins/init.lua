@@ -93,7 +93,7 @@ return {
 			require("tiny-inline-diagnostic").setup({
 				preset = "classic",
 				options = {
-					softwrap = 20,
+					softwrap = 32,
 				},
 			})
 		end,

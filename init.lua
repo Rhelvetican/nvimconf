@@ -49,6 +49,8 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 
 vim.diagnostic.config({
 	virtual_text = false,
+	update_in_insert = true,
+	signs = true,
 	underline = true,
 	severity_sort = true,
 })
