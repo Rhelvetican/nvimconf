@@ -24,6 +24,37 @@ return {
 	},
 
 	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({
+				compile_path = vim.fn.stdpath("cache") .. "\\catppuccin",
+
+				default_integrations = true,
+				integrations = {
+					cmp = true,
+					aerial = true,
+					overseer = true,
+					lsp_saga = true,
+				},
+
+				styles = {
+					keywords = { "italic" },
+					types = { "italic" },
+					variables = { "italic" },
+				},
+
+				custom_highlights = function(colors)
+					return {
+						all = {},
+					}
+				end,
+			})
+		end,
+	},
+
+	{
 		"marko-cerovac/material.nvim",
 		opts = function()
 			require("material").setup({
@@ -103,7 +134,6 @@ return {
 
 	{
 		"nvzone/menu",
-		dependencies = {},
 		config = function()
 			local map = vim.keymap.set
 
@@ -197,7 +227,11 @@ return {
 			local map = vim.keymap.set
 			map("n", ".c", "<cmd>Lspsaga code_action<CR>")
 
-			require("lspsaga").setup({})
+			require("lspsaga").setup({
+				ui = {
+					kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+				},
+			})
 		end,
 	},
 
@@ -289,7 +323,7 @@ return {
 
 	{
 		"nvim-telescope/telescope.nvim",
-		cmd = "Telescope",
+		cmd = "Tele",
 		dependencies = {
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 		},
@@ -512,6 +546,11 @@ return {
 				},
 			})
 		end,
+	},
+
+	{
+		"stevearc/overseer.nvim",
+		opts = {},
 	},
 
 	{
