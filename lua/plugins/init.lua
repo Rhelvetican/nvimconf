@@ -79,6 +79,15 @@ return {
 	},
 
 	{
+		"Goose97/timber.nvim",
+		version = "*",
+		event = "VeryLazy",
+		config = function()
+			require("timber").setup({})
+		end,
+	},
+
+	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {

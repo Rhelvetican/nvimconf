@@ -27,6 +27,9 @@ map("n", "fm", function()
 	require("plugins.configs.conform").format()
 end)
 
+-- mason
+map("n", ".ms", "<cmd> Mason <CR>")
+
 -- oil.nvim
 map("n", "<C-o>", "<cmd> Oil <CR>")
 map("n", "<C-O>", "<cmd> Oil --float <CR>")
