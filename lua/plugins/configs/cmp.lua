@@ -8,7 +8,6 @@ return {
 	},
 
 	mapping = cmp.mapping.preset.insert({
-
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
@@ -43,11 +42,28 @@ return {
 	}),
 
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp" },
+		{
+			name = "nvim_lsp",
+			option = {
+				markdown_oxide = {
+					keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
+				},
+			},
+		},
 		{ name = "nvim_lsp_signature_help" },
 		{ name = "lazydev", group_index = 0 },
 		{ name = "luasnip" },
 		{ name = "buffer" },
+		{
+			name = "spell",
+			option = {
+				keep_all_entries = false,
+				enable_in_context = function()
+					return true
+				end,
+				preselect_correct_word = true,
+			},
+		},
 		{ name = "nvim_lua" },
 		{ name = "path" },
 	}),

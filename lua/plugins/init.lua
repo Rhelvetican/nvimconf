@@ -1,3 +1,5 @@
+local map = vim.keymap.set
+
 return {
 	{
 		"nvim-lua/plenary.nvim",
@@ -37,6 +39,7 @@ return {
 					aerial = true,
 					overseer = true,
 					lsp_saga = true,
+					nvim_surround = true,
 				},
 
 				styles = {
@@ -52,6 +55,13 @@ return {
 				end,
 			})
 		end,
+	},
+
+	{
+		"bluz71/vim-moonfly-colors",
+		name = "moonfly",
+		lazy = false,
+		priority = 1000,
 	},
 
 	{
@@ -79,11 +89,28 @@ return {
 	},
 
 	{
+		"kylechui/nvim-surround",
+		version = "*",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({})
+		end,
+	},
+
+	{
 		"Goose97/timber.nvim",
 		version = "*",
 		event = "VeryLazy",
 		config = function()
 			require("timber").setup({})
+		end,
+	},
+
+	{
+		"psliwka/vim-dirtytalk",
+		build = ":DirtytalkUpdate",
+		config = function()
+			vim.opt.spelllang = { "en", "programming" }
 		end,
 	},
 
@@ -98,6 +125,7 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lua",
 			"rafamadriz/friendly-snippets",
+			"f3fora/cmp-spell",
 			"mrcjkb/rustaceanvim",
 			"https://codeberg.org/FelipeLema/cmp-async-path",
 
@@ -144,7 +172,7 @@ return {
 	{
 		"nvzone/menu",
 		config = function()
-			local map = vim.keymap.set
+			local map = map
 
 			map("n", "<C-j>", function()
 				require("menu").open("default")
@@ -233,7 +261,6 @@ return {
 		},
 
 		config = function()
-			local map = vim.keymap.set
 			map("n", ".c", "<cmd>Lspsaga code_action<CR>")
 
 			require("lspsaga").setup({
@@ -279,7 +306,7 @@ return {
 			"MunifTanjim/nui.nvim",
 		},
 		config = function()
-			vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
+			map({ "v", "n" }, "gf", require("actions-preview").code_actions)
 			require("actions-preview").setup({
 				diff = {
 					ctxlen = 2,
@@ -374,43 +401,47 @@ return {
 			require("aerial").setup({
 				filter_kind = false,
 				on_attach = function()
-					vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-					vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+					map("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+					map("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
 				end,
 			})
 
-			vim.keymap.set("n", "<leader><C-a>", "<cmd>AerialToggle!<CR>")
+			map("n", "<leader><C-a>", "<cmd>AerialToggle!<CR>")
 		end,
 	},
 
 	{
 		"vyfor/cord.nvim",
-		build = "./build or .\\build",
-		event = "VeryLazy",
+		branch = "client-server",
+		build = ":Cord fetch",
 		opts = function()
 			require("cord").setup({
 				editor = {
 					client = "neovim",
-					tooltip = "The Superior Text Editor",
-				},
-
-				display = {
-					show_repository = false,
-				},
-
-				lsp = {
-					show_problem_count = true,
-					severity = 2,
+					tooltip = "The Supreme Text Editor",
 				},
 
 				text = {
-					workspace = "Working on {}",
+					editing = function(opts)
+						if opts.filetype == "rust" then
+							return "Oxidizing " .. opts.filename
+						end
+
+						if opts.filetype == "lua" then
+							return "Engineering Neovim config..."
+						end
+
+						return "Editing " .. opts.filename
+					end,
+
+					docs = "Reading docs...",
+					dashboard = "At home...",
+					vcs = "Managing git...",
 				},
 
-				buttons = {
-					{
-						label = "View Plugin",
-						url = "https://github.com/vyfor/cord.nvim",
+				assets = {
+					["Cargo.toml"] = {
+						text = "Managing Cargo dependencies...",
 					},
 				},
 			})
@@ -444,19 +475,19 @@ return {
 	{
 		"lewis6991/hover.nvim",
 		config = function()
-			vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
+			map("n", "K", require("hover").hover, { desc = "hover.nvim" })
 
-			vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
+			map("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
 
-			vim.keymap.set("n", "<C-p>", function()
+			map("n", "<C-p>", function()
 				require("hover").hover_switch("previous", {})
 			end, { desc = "hover.nvim (previous source)" })
 
-			vim.keymap.set("n", "<C-n>", function()
+			map("n", "<C-n>", function()
 				require("hover").hover_switch("next", {})
 			end, { desc = "hover.nvim (next source)" })
 
-			vim.keymap.set("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
+			map("n", "<MouseMove>", require("hover").hover_mouse, { desc = "hover.nvim (mouse)" })
 
 			require("hover").setup({
 				init = function()
