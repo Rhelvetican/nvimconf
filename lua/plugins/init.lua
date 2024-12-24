@@ -45,6 +45,8 @@ return {
 					"telescope",
 					"which-key",
 				},
+
+				lualine_style = "stealth",
 			})
 		end,
 	},
@@ -224,12 +226,6 @@ return {
 
 		config = function()
 			map("n", ".c", "<cmd>Lspsaga code_action<CR>")
-
-			require("lspsaga").setup({
-				ui = {
-					kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-				},
-			})
 		end,
 	},
 
