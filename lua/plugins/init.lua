@@ -32,8 +32,56 @@ return {
 
 		config = function()
 			require("themify").setup(require("plugins.themes"))
+			map({ "n", "v", "o" }, "tt", "<Cmd>Themify<CR>")
+		end,
+	},
 
-			map({ "n", "v" }, ".cs", "<Cmd>Themify<CR>")
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		config = function()
+			require("catppuccin").setup({
+				styles = {
+					comments = { "italic" },
+					keywords = { "italic" },
+					variables = { "italic" },
+				},
+
+				highlight_override = {
+					all = function(col)
+						return {
+							["@punctuation.bracket"] = col.pink,
+						}
+					end,
+				},
+			})
+		end,
+	},
+
+	{
+		"marko-cerovac/material.nvim",
+
+		config = function()
+			require("material").setup({
+				styles = {
+					keywords = { italic = true },
+					variables = { italic = true },
+					types = { italic = true },
+				},
+
+				plugins = {
+					"dap",
+					"fidget",
+					"indent-blankline",
+					"nvim-cmp",
+					"lspsaga",
+					"nvim-web-devicons",
+					"telescope",
+					"which-key",
+				},
+
+				lualine_style = "stealth",
+			})
 		end,
 	},
 
@@ -97,7 +145,6 @@ return {
 			},
 		},
 		opts = function()
-			---@diagnostic disable-next-line: different-requires
 			return require("plugins.configs.cmp")
 		end,
 	},
@@ -121,8 +168,6 @@ return {
 	{
 		"nvzone/menu",
 		config = function()
-			local map = map
-
 			map("n", "<C-j>", function()
 				require("menu").open("default")
 			end, {})
@@ -196,7 +241,9 @@ return {
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("lualine").setup({})
+			require("lualine").setup({
+				options = { theme = "auto" },
+			})
 		end,
 	},
 
@@ -212,7 +259,26 @@ return {
 		},
 
 		config = function()
-			map("n", ".c", "<cmd>Lspsaga code_action<CR>")
+			-- Code Actions
+			map({ "n", "v" }, ".ca", "<cmd>Lspsaga code_action<CR>")
+
+			-- Finder
+			map({ "n", "v" }, ".cf", "<cmd>Lspsaga finder<CR>")
+
+			-- Gotos
+			map({ "n", "v" }, ".cg", "<cmd>Lspsaga goto_definition<CR>")
+			map({ "n", "v" }, ".cp", "<cmd>Lspsaga peek_definition<CR>")
+			map({ "n", "v" }, ".ctg", "<cmd>Lspsaga goto_type_definition<CR>")
+			map({ "n", "v" }, ".ctp", "<cmd>Lspsaga peek_type_definition<CR>")
+
+			-- Utils
+			map({ "n", "v" }, ".cdw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
+			map({ "n", "v" }, ".cdl", "<cmd>Lspsaga show_line_diagnostics<CR>")
+			map({ "n", "v" }, ".cdb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
+			map({ "n", "v" }, ".cdc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+
+			map({ "n", "v" }, ".cdn", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+			map({ "n", "v" }, ".cdN", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 		end,
 	},
 

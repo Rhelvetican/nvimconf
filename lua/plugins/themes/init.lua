@@ -1,29 +1,31 @@
 return {
+	-- Enable async loading.
 	async = true,
+
 	"folke/tokyonight.nvim",
+	"marko-cerovac/material.nvim",
+	"catppuccin/nvim",
+	"scottmckendry/cyberdream.nvim",
+
 	{
-		"marko-cerovac/material.nvim",
-		opts = function()
-			require("material").setup({
-				styles = {
-					keywords = { italic = true },
-					variables = { italic = true },
-					types = { italic = true },
-				},
+		"nyoom-engineering/oxocarbon.nvim",
+		config = {},
+	},
 
-				plugins = {
-					"dap",
-					"fidget",
-					"indent-blankline",
-					"nvim-cmp",
-					"lspsaga",
-					"nvim-web-devicons",
-					"telescope",
-					"which-key",
-				},
+	{
+		"savq/melange-nvim",
+		branch = "master",
+	},
 
-				lualine_style = "stealth",
-			})
+	{
+		"AlexvZyl/nordic.nvim",
+		config = {},
+	},
+
+	{
+		"EdenEast/nightfox.nvim",
+		config = function()
+			require("nightfox").setup({})
 		end,
 	},
 }

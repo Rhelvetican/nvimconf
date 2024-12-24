@@ -92,38 +92,3 @@ lspconfig.taplo.setup({
 lspconfig.nushell.setup({
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
-
-lspconfig.markdown_oxide.setup({
-	capabilities = vim.tbl_deep_extend("force", capabilities, {
-		workspace = {
-			didChangeWatchedFiles = {
-				dynamicRegistration = true,
-			},
-		},
-	}),
-
-	on_attach = function(bufnr)
-		local function check_codelens_support()
-			local clients = vim.lsp.get_clients({ bufnr = 0 })
-
-			for _, c in ipairs(clients) do
-				if c.server_capabilities.codeLensProvider then
-					return true
-				end
-			end
-
-			return false
-		end
-
-		vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAttach", "BufEnter" }, {
-			buffer = bufnr,
-			callback = function()
-				if check_codelens_support() then
-					vim.lsp.codelens.refresh({ bufnr = 0 })
-				end
-			end,
-		})
-
-		vim.api.nvim_exec_autocmds("User", { pattern = "LspAttach" })
-	end,
-})
