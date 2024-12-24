@@ -259,6 +259,12 @@ return {
 		},
 
 		config = function()
+			require("lspsaga").setup({
+				ui = {
+					button = { "", "" },
+				},
+			})
+
 			-- Code Actions
 			map({ "n", "v" }, ".ca", "<cmd>Lspsaga code_action<CR>")
 
