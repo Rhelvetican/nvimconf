@@ -26,45 +26,6 @@ return {
 	},
 
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		config = function()
-			require("catppuccin").setup({
-				compile_path = vim.fn.stdpath("cache") .. "\\catppuccin",
-
-				default_integrations = true,
-				integrations = {
-					cmp = true,
-					aerial = true,
-					overseer = true,
-					lsp_saga = true,
-					nvim_surround = true,
-				},
-
-				styles = {
-					keywords = { "italic" },
-					types = { "italic" },
-					variables = { "italic" },
-				},
-
-				custom_highlights = function(colors)
-					return {
-						all = {},
-					}
-				end,
-			})
-		end,
-	},
-
-	{
-		"bluz71/vim-moonfly-colors",
-		name = "moonfly",
-		lazy = false,
-		priority = 1000,
-	},
-
-	{
 		"marko-cerovac/material.nvim",
 		opts = function()
 			require("material").setup({
@@ -243,9 +204,10 @@ return {
 	},
 
 	{
-		"echasnovski/mini.statusline",
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			require("mini.statusline").setup({ set_vim_settings = false })
+			require("lualine").setup({})
 		end,
 	},
 
