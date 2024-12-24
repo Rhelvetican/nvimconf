@@ -26,28 +26,14 @@ return {
 	},
 
 	{
-		"marko-cerovac/material.nvim",
-		opts = function()
-			require("material").setup({
-				styles = {
-					keywords = { italic = true },
-					variables = { italic = true },
-					types = { italic = true },
-				},
+		"lmantw/themify.nvim",
+		lazy = false,
+		priority = 9999,
 
-				plugins = {
-					"dap",
-					"fidget",
-					"indent-blankline",
-					"nvim-cmp",
-					"lspsaga",
-					"nvim-web-devicons",
-					"telescope",
-					"which-key",
-				},
+		config = function()
+			require("themify").setup(require("plugins.themes"))
 
-				lualine_style = "stealth",
-			})
+			map({ "n", "v" }, ".cs", "<Cmd>Themify<CR>")
 		end,
 	},
 
@@ -156,6 +142,7 @@ return {
 			library = {
 				"lazy.nvim",
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+				{ plugins = "nvim-dap-ui", types = true },
 			},
 		},
 	},
@@ -498,6 +485,13 @@ return {
 		},
 		config = function()
 			require("dapui").setup()
+
+			map("n", "bo", function()
+				require("dapui").open({})
+			end)
+			map("n", "bc", function()
+				require("dapui").close({})
+			end)
 		end,
 	},
 

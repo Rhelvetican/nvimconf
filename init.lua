@@ -61,7 +61,3 @@ vim.o.background = "dark"
 
 vim.g.mellow_italic_functions = true
 vim.g.mellow_italic_variables = true
-
-vim.g.material_style = "deep ocean"
-
-vim.cmd("colorscheme material")
