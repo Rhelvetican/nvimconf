@@ -53,15 +53,6 @@ return {
 					keywords = { "italic" },
 					variables = { "italic" },
 				},
-
-				highlight_override = {
-					all = function(col)
-						return {
-							["@punctuation.bracket"] = col.pink,
-							["@punctuation.special"] = col.pink,
-						}
-					end,
-				},
 			})
 		end,
 	},
@@ -90,6 +81,37 @@ return {
 				},
 
 				lualine_style = "stealth",
+			})
+		end,
+	},
+
+	{
+		"projekt0n/github-nvim-theme",
+		priority = 9999,
+		config = function()
+			require("github-theme").setup({
+				options = {
+					styles = {
+						comments = "italic",
+						functions = "italic",
+						keywords = "italic",
+						variables = "italic",
+						types = "italic,bold",
+					},
+
+					modules = {
+						cmp = true,
+						whichkey = true,
+						treesitter = true,
+						treesitter_context = true,
+						lsp_semantic_tokens = true,
+						gitsigns = true,
+						dapui = true,
+						native_lsp = true,
+						telescope = true,
+						fidget = true,
+					},
+				},
 			})
 		end,
 	},

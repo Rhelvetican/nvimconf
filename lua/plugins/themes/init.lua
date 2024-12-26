@@ -6,26 +6,13 @@ return {
 	"marko-cerovac/material.nvim",
 	"catppuccin/nvim",
 	"scottmckendry/cyberdream.nvim",
-
-	{
-		"nyoom-engineering/oxocarbon.nvim",
-		config = {},
-	},
+	"nyoom-engineering/oxocarbon.nvim",
+	"AlexvZyl/nordic.nvim",
+	"EdenEast/nightfox.nvim",
+	"projekt0n/github-nvim-theme",
 
 	{
 		"savq/melange-nvim",
 		branch = "master",
-	},
-
-	{
-		"AlexvZyl/nordic.nvim",
-		config = {},
-	},
-
-	{
-		"EdenEast/nightfox.nvim",
-		config = function()
-			require("nightfox").setup({})
-		end,
 	},
 }
