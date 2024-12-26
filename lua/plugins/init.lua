@@ -37,6 +37,13 @@ return {
 	},
 
 	{
+		"lewis6991/satellite.nvim",
+		config = function()
+			require("satellite").setup({})
+		end,
+	},
+
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		config = function()
@@ -51,6 +58,7 @@ return {
 					all = function(col)
 						return {
 							["@punctuation.bracket"] = col.pink,
+							["@punctuation.special"] = col.pink,
 						}
 					end,
 				},
@@ -67,6 +75,7 @@ return {
 					keywords = { italic = true },
 					variables = { italic = true },
 					types = { italic = true },
+					comments = { italic = true },
 				},
 
 				plugins = {
@@ -266,25 +275,25 @@ return {
 			})
 
 			-- Code Actions
-			map({ "n", "v" }, ".ca", "<cmd>Lspsaga code_action<CR>")
+			map({ "n", "v" }, "lca", "<cmd>Lspsaga code_action<CR>")
 
 			-- Finder
-			map({ "n", "v" }, ".cf", "<cmd>Lspsaga finder<CR>")
+			map({ "n", "v" }, "lcf", "<cmd>Lspsaga finder<CR>")
 
 			-- Gotos
-			map({ "n", "v" }, ".cg", "<cmd>Lspsaga goto_definition<CR>")
-			map({ "n", "v" }, ".cp", "<cmd>Lspsaga peek_definition<CR>")
-			map({ "n", "v" }, ".ctg", "<cmd>Lspsaga goto_type_definition<CR>")
-			map({ "n", "v" }, ".ctp", "<cmd>Lspsaga peek_type_definition<CR>")
+			map({ "n", "v" }, "lcg", "<cmd>Lspsaga goto_definition<CR>")
+			map({ "n", "v" }, "lcp", "<cmd>Lspsaga peek_definition<CR>")
+			map({ "n", "v" }, "lctg", "<cmd>Lspsaga goto_type_definition<CR>")
+			map({ "n", "v" }, "lctp", "<cmd>Lspsaga peek_type_definition<CR>")
 
 			-- Utils
-			map({ "n", "v" }, ".cdw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
-			map({ "n", "v" }, ".cdl", "<cmd>Lspsaga show_line_diagnostics<CR>")
-			map({ "n", "v" }, ".cdb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
-			map({ "n", "v" }, ".cdc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+			map({ "n", "v" }, "lcdw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
+			map({ "n", "v" }, "lcdl", "<cmd>Lspsaga show_line_diagnostics<CR>")
+			map({ "n", "v" }, "lcdb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
+			map({ "n", "v" }, "lcdc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
 
-			map({ "n", "v" }, ".cdn", "<cmd>Lspsaga diagnostic_jump_next<CR>")
-			map({ "n", "v" }, ".cdN", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+			map({ "n", "v" }, "lcdn", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+			map({ "n", "v" }, "lcdN", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 		end,
 	},
 
