@@ -3,9 +3,10 @@ local map = vim.keymap.set
 vim.g.mapleader = "."
 
 -- general mappings
-map("n", "<C-s>", "<cmd> w <CR>")
+map({ "n", "v", "o" }, "<C-s>", "<cmd> w <CR>")
 map("n", "g?", "<cmd>lua vim.diagnostic.open_float()<CR>")
-map("n", "<C-c>", "<cmd> %y+ <CR>") -- copy whole filecontent
+map({ "n", "v", "o" }, "<C-c>", "<cmd> %y+ <CR>") -- copy whole filecontent
+map({ "n", "v", "o" }, "tb", "<cmd>terminal<CR>")
 
 -- telescope
 map("n", "tff", "<cmd> Tele find_files <CR>")
