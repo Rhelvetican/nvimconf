@@ -1,6 +1,6 @@
 local map = vim.keymap.set
 
-vim.g.mapleader = "."
+vim.g.mapleader = ","
 
 -- general mappings
 map({ "n", "v", "o" }, "<C-s>", "<cmd> w <CR>")

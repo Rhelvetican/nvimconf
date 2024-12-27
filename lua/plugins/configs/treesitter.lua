@@ -5,8 +5,26 @@ require("nvim-treesitter.configs").setup({
 	sync_install = true,
 
 	ignore_install = {},
-	ensure_installed = { "lua", "python", "vim", "vimdoc", "rust", "ninja", "rst", "nu" },
 
+	ensure_installed = {
+		"c",
+		"cmake",
+		"cpp",
+		"objc",
+		"lua",
+		"python",
+		"vim",
+		"vimdoc",
+		"rust",
+		"ninja",
+		"rst",
+		"nu",
+		"gitignore",
+		"markdown",
+	},
+
+	autotag = { enable = true },
+	indent = { enable = true },
 	highlight = {
 		enable = true,
 	},

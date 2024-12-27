@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local map = vim.keymap.set
 
 return {
@@ -32,7 +33,7 @@ return {
 
 		config = function()
 			require("themify").setup(require("plugins.themes"))
-			map({ "n", "v", "o" }, "tt", "<Cmd>Themify<CR>")
+			map({ "n", "v", "o" }, "<leader>t", "<Cmd>Themify<CR>")
 		end,
 	},
 
@@ -313,25 +314,25 @@ return {
 			})
 
 			-- Code Actions
-			map({ "n", "v" }, "lca", "<cmd>Lspsaga code_action<CR>")
+			map({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
 			-- Finder
-			map({ "n", "v" }, "lcf", "<cmd>Lspsaga finder<CR>")
+			map({ "n", "v" }, "<leader>cf", "<cmd>Lspsaga finder<CR>")
 
 			-- Gotos
-			map({ "n", "v" }, "lcg", "<cmd>Lspsaga goto_definition<CR>")
-			map({ "n", "v" }, "lcp", "<cmd>Lspsaga peek_definition<CR>")
-			map({ "n", "v" }, "lctg", "<cmd>Lspsaga goto_type_definition<CR>")
-			map({ "n", "v" }, "lctp", "<cmd>Lspsaga peek_type_definition<CR>")
+			map({ "n", "v" }, "<leader>cg", "<cmd>Lspsaga goto_definition<CR>")
+			map({ "n", "v" }, "<leader>cp", "<cmd>Lspsaga peek_definition<CR>")
+			map({ "n", "v" }, "<leader>ctg", "<cmd>Lspsaga goto_type_definition<CR>")
+			map({ "n", "v" }, "<leader>ctp", "<cmd>Lspsaga peek_type_definition<CR>")
 
 			-- Utils
-			map({ "n", "v" }, "lcdw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
-			map({ "n", "v" }, "lcdl", "<cmd>Lspsaga show_line_diagnostics<CR>")
-			map({ "n", "v" }, "lcdb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
-			map({ "n", "v" }, "lcdc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+			map({ "n", "v" }, "<leader>cdw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
+			map({ "n", "v" }, "<leader>cdl", "<cmd>Lspsaga show_line_diagnostics<CR>")
+			map({ "n", "v" }, "<leader>cdb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
+			map({ "n", "v" }, "<leader>cdc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
 
-			map({ "n", "v" }, "lcdn", "<cmd>Lspsaga diagnostic_jump_next<CR>")
-			map({ "n", "v" }, "lcdN", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+			map({ "n", "v" }, "<leader>cdn", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+			map({ "n", "v" }, "<leader>cdN", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 		end,
 	},
 
@@ -378,6 +379,20 @@ return {
 
 				backend = { "nui" },
 			})
+		end,
+	},
+
+	{
+		"chikko80/error-lens.nvim",
+		event = "BufRead",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+		},
+		config = function()
+			require("error-lens").setup({})
+
+			map({ "n", "v" }, "<leader>el", "<cmd>ErrorLensToggle<CR>")
+			map({ "n", "v" }, "<leader>et", "<cmd>ErrorLensTelescope<CR>")
 		end,
 	},
 
@@ -464,9 +479,9 @@ return {
 		opts = function()
 			require("aerial").setup({
 				filter_kind = false,
-				on_attach = function()
-					map("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-					map("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+				on_attach = function(bufnr)
+					map("n", "<leader>a{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+					map("n", "<leader>a}", "<cmd>AerialNext<CR>", { buffer = bufnr })
 				end,
 			})
 
@@ -477,6 +492,7 @@ return {
 	{
 		"vyfor/cord.nvim",
 		branch = "client-server",
+		version = "*",
 		build = ":Cord fetch",
 		opts = function()
 			require("cord").setup({
@@ -487,15 +503,35 @@ return {
 
 				text = {
 					editing = function(opts)
-						if opts.filetype == "rust" then
+						local switch_table = {}
+						local type, name = opts.filetype, opts.filename
+
+						switch_table["rust"] = function(name)
 							return "Oxidizing " .. opts.filename
 						end
 
-						if opts.filetype == "lua" then
+						switch_table["lua"] = function(_)
 							return "Engineering Neovim config..."
 						end
 
-						return "Editing " .. opts.filename
+						local oldschool = function(name)
+							return "Being oldschool in " .. opts.filename
+						end
+
+						switch_table["c"] = oldschool
+						switch_table["cpp"] = oldschool
+						switch_table["h"] = oldschool
+						switch_table["hpp"] = oldschool
+						switch_table["objc"] = oldschool
+						switch_table["objcpp"] = oldschool
+
+						local handle = switch_table[type]
+
+						if handle then
+							return handle(name)
+						else
+							return "Editing " .. opts.filename
+						end
 					end,
 
 					docs = "Reading docs...",

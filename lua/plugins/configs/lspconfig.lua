@@ -92,3 +92,22 @@ lspconfig.taplo.setup({
 lspconfig.nushell.setup({
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 })
+
+lspconfig.clangd.setup({
+	capabilities = capabilities,
+	on_attach = function(client, buffer)
+		-- On attach
+	end,
+
+	filetypes = { "c", "cc", "h", "cpp", "hpp", "objc", "objcpp" },
+	cmd = { "clangd", "--background-index" },
+	root_dir = lspconfig.util.root_pattern(
+		".clangd",
+		".clang-tidy",
+		".clang-format",
+		"compile_commands.json",
+		"compile_flags.txt",
+		"configure.ac",
+		".git"
+	),
+})
