@@ -352,6 +352,7 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"j-hui/fidget.nvim",
+			"williamboman/mason-lspconfig.nvim",
 		},
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
@@ -497,7 +498,7 @@ return {
 						end
 
 						switch_table["lua"] = function()
-							return "Engineering Neovim config..."
+							return "Writing cool lua code at" .. name
 						end
 
 						local oldschool = function()
