@@ -383,20 +383,6 @@ return {
 	},
 
 	{
-		"chikko80/error-lens.nvim",
-		event = "BufRead",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-		},
-		config = function()
-			require("error-lens").setup({})
-
-			map({ "n", "v" }, "<leader>el", "<cmd>ErrorLensToggle<CR>")
-			map({ "n", "v" }, "<leader>et", "<cmd>ErrorLensTelescope<CR>")
-		end,
-	},
-
-	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
@@ -506,16 +492,16 @@ return {
 						local switch_table = {}
 						local type, name = opts.filetype, opts.filename
 
-						switch_table["rust"] = function(name)
-							return "Oxidizing " .. opts.filename
+						switch_table["rust"] = function()
+							return "Oxidizing " .. name
 						end
 
-						switch_table["lua"] = function(_)
+						switch_table["lua"] = function()
 							return "Engineering Neovim config..."
 						end
 
-						local oldschool = function(name)
-							return "Being oldschool in " .. opts.filename
+						local oldschool = function()
+							return "Being oldschool in " .. name
 						end
 
 						switch_table["c"] = oldschool
@@ -525,10 +511,14 @@ return {
 						switch_table["objc"] = oldschool
 						switch_table["objcpp"] = oldschool
 
+						switch_table["zig"] = function()
+							return "Writing Zig at " .. name
+						end
+
 						local handle = switch_table[type]
 
 						if handle then
-							return handle(name)
+							return handle()
 						else
 							return "Editing " .. opts.filename
 						end

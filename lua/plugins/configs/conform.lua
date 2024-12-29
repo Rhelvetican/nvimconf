@@ -4,6 +4,7 @@ return {
 		python = { "ruff format" },
 		rust = { "rustfmt", lsp_format = "fallback" },
 		toml = { "taplo fmt", lsp_format = "fallback" },
+		zig = { "zig fmt .", lsp_format = "fallback" },
 	},
 
 	formatters = {

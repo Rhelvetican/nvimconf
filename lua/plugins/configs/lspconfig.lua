@@ -111,3 +111,7 @@ lspconfig.clangd.setup({
 		".git"
 	),
 })
+
+lspconfig.zls.setup({
+	capabilities = capabilities,
+})
