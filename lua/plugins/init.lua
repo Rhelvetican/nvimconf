@@ -480,7 +480,7 @@ return {
 		"vyfor/cord.nvim",
 		branch = "client-server",
 		version = "*",
-		build = ":Cord fetch",
+		build = ":Cord update",
 		opts = function()
 			require("cord").setup({
 				editor = {
@@ -689,6 +689,37 @@ return {
 	{
 		"stevearc/overseer.nvim",
 		opts = {},
+	},
+
+	{
+		"monaqa/dial.nvim",
+
+		config = function()
+			map("n", "<C-a>", function()
+				require("dial.map").manipulate("increment", "normal")
+			end)
+			map("n", "<C-x>", function()
+				require("dial.map").manipulate("decrement", "normal")
+			end)
+			map("n", "g<C-a>", function()
+				require("dial.map").manipulate("increment", "gnormal")
+			end)
+			map("n", "g<C-x>", function()
+				require("dial.map").manipulate("decrement", "gnormal")
+			end)
+			map("v", "<C-a>", function()
+				require("dial.map").manipulate("increment", "visual")
+			end)
+			map("v", "<C-x>", function()
+				require("dial.map").manipulate("decrement", "visual")
+			end)
+			map("v", "g<C-a>", function()
+				require("dial.map").manipulate("increment", "gvisual")
+			end)
+			map("v", "g<C-x>", function()
+				require("dial.map").manipulate("decrement", "gvisual")
+			end)
+		end,
 	},
 
 	{
