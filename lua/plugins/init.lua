@@ -8,6 +8,13 @@ return {
 	},
 
 	{
+		"simrat39/inlay-hints.nvim",
+		opts = function()
+			require("inlay-hints").setup({})
+		end,
+	},
+
+	{
 		"stevearc/dressing.nvim",
 		opts = function()
 			require("dressing").setup({})
@@ -51,13 +58,21 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			dashboard = { enabled = true },
-			indent = { enabled = true },
+			indent = { enabled = true, chunk = { enabled = true } },
 			input = { enabled = true },
 			notifier = { enabled = true },
 			quickfile = { enabled = true },
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
 		},
+	},
+
+	{
+		"echasnovski/mini.nvim",
+		version = "*",
+		config = function()
+			require("plugins.configs.mini")
+		end,
 	},
 
 	{
@@ -111,9 +126,14 @@ return {
 					styles = {
 						comments = "italic",
 						functions = "italic",
-						keywords = "italic",
+						keywords = "bold",
 						variables = "italic",
 						types = "italic,bold",
+						numbers = "bold",
+						constants = "bold",
+						operators = "NONE",
+						strings = "italic",
+						conditionals = "NONE",
 					},
 
 					modules = {
@@ -127,18 +147,10 @@ return {
 						native_lsp = true,
 						telescope = true,
 						fidget = true,
+						mini = true,
 					},
 				},
 			})
-		end,
-	},
-
-	{
-		"kylechui/nvim-surround",
-		version = "*",
-		event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({})
 		end,
 	},
 
@@ -211,23 +223,6 @@ return {
 		end,
 	},
 
-	{ "nvzone/volt", lazy = true },
-
-	{
-		"nvzone/menu",
-		config = function()
-			map("n", "<C-j>", function()
-				require("menu").open("default")
-			end, {})
-
-			map("n", "<RightMouse>", function()
-				vim.cmd.exec("'normal! \\<RightMouse>'")
-				local options = vim.bo.ft == "NvimTree" and "nvimtree" or "default"
-				require("menu").open(options, { mouse = true })
-			end)
-		end,
-	},
-
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
@@ -291,6 +286,21 @@ return {
 		config = function()
 			require("lualine").setup({
 				options = { theme = "auto" },
+				sections = {
+					lualine_a = { { "mode", color = { gui = "bold" } } },
+					lualine_b = {
+						{ "branch", color = { gui = "bold" } },
+						{ "diff", color = { gui = "bold" } },
+						{
+							"diagnostics",
+							color = { gui = "bold" },
+						},
+					},
+					lualine_c = { { "filename", color = { gui = "bold" } } },
+					lualine_x = { "encoding", "fileformat", "filetype" },
+					lualine_y = { "progress" },
+					lualine_z = { { "location", color = { gui = "bold" } } },
+				},
 			})
 		end,
 	},
@@ -380,37 +390,6 @@ return {
 
 				backend = { "nui" },
 			})
-		end,
-	},
-
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			local highlight = {
-				"RainbowRed",
-				"RainbowYellow",
-				"RainbowBlue",
-				"RainbowOrange",
-				"RainbowGreen",
-				"RainbowViolet",
-				"RainbowCyan",
-			}
-
-			local hooks = require("ibl.hooks")
-			-- create the highlight groups in the highlight setup hook, so they are reset
-			-- every time the colorscheme changes
-			hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-				vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
-				vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
-				vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
-				vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
-				vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
-				vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
-				vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
-			end)
-
-			require("ibl").setup({ indent = { highlight = highlight, char = "│" } })
 		end,
 	},
 
@@ -611,6 +590,13 @@ return {
 			dap.listeners.before.event_exited.dapui_config = function()
 				dapui.close()
 			end
+
+			map({ "n", "v" }, "<C-d>bgo", function()
+				dapui.open()
+			end)
+			map({ "n", "v" }, "<C-d>bgc", function()
+				dapui.close()
+			end)
 		end,
 	},
 
@@ -687,11 +673,6 @@ return {
 	},
 
 	{
-		"stevearc/overseer.nvim",
-		opts = {},
-	},
-
-	{
 		"monaqa/dial.nvim",
 
 		config = function()
@@ -719,13 +700,6 @@ return {
 			map("v", "g<C-x>", function()
 				require("dial.map").manipulate("decrement", "gvisual")
 			end)
-		end,
-	},
-
-	{
-		"simrat39/inlay-hints.nvim",
-		opts = function()
-			require("inlay-hints").setup({})
 		end,
 	},
 }
