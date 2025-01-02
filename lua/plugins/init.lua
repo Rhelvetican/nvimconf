@@ -66,7 +66,7 @@ return {
 		opts = {
 			bigfile = { enabled = true },
 			dashboard = { enabled = true },
-			indent = { enabled = true, chunk = { enabled = true } },
+			indent = { enabled = true, animate = { enabled = false }, chunk = { enabled = true } },
 			input = { enabled = true },
 			notifier = { enabled = true },
 			quickfile = { enabled = true },
@@ -92,6 +92,24 @@ return {
 					comments = { "italic" },
 					keywords = { "italic" },
 					variables = { "italic" },
+					types = { "bold" },
+					functions = { "italic", "bold" },
+					miscs = { "italic" },
+					properties = { "italic" },
+				},
+
+				integrations = {
+					cmp = true,
+					dap = true,
+					mason = true,
+					dap_ui = true,
+					snacks = true,
+					aerial = true,
+					lsp_saga = true,
+					telescope = true,
+					which_key = true,
+					treesitter = true,
+					treesitter_context = true,
 				},
 			})
 		end,
@@ -132,16 +150,13 @@ return {
 			require("github-theme").setup({
 				options = {
 					styles = {
-						comments = "NONE",
 						functions = "italic",
 						keywords = "bold",
 						variables = "italic",
 						types = "italic,bold",
 						numbers = "bold",
 						constants = "bold",
-						operators = "NONE",
 						strings = "italic",
-						conditionals = "NONE",
 					},
 
 					modules = {
@@ -360,10 +375,7 @@ return {
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
 		cmd = { "Mason", "MasonInstall" },
-		opts = function()
-			map({ "n", "v", "o" }, "<leader>m", "<cmd>Mason<CR>")
-			return {}
-		end,
+		opts = require("plugins.configs.mason"),
 	},
 
 	{
@@ -638,6 +650,7 @@ return {
 	{
 		"saecki/crates.nvim",
 		tag = "stable",
+		event = { "BufRead Cargo.toml", "BufRead cargo.toml" },
 		dependencies = {
 			"nvimtools/none-ls.nvim",
 		},
@@ -646,9 +659,13 @@ return {
 				lsp = {
 					enabled = true,
 					actions = true,
-					completion = true,
+					completion = {
+						cmp = true,
+					},
 					hover = true,
 				},
+				autoload = true,
+				autoupdate = true,
 			})
 		end,
 	},
@@ -684,38 +701,38 @@ return {
 		"monaqa/dial.nvim",
 
 		config = function()
-			local map = require("dial.map")
+			local dialmap = require("dial.map")
 
 			map("n", "<C-a>", function()
-				map.manipulate("increment", "normal")
+				dialmap.manipulate("increment", "normal")
 			end)
 
 			map("n", "<C-x>", function()
-				map.manipulate("decrement", "normal")
+				dialmap.manipulate("decrement", "normal")
 			end)
 
 			map("n", "g<C-a>", function()
-				map.manipulate("increment", "gnormal")
+				dialmap.manipulate("increment", "gnormal")
 			end)
 
 			map("n", "g<C-x>", function()
-				map.manipulate("decrement", "gnormal")
+				dialmap.manipulate("decrement", "gnormal")
 			end)
 
 			map("v", "<C-a>", function()
-				map.manipulate("increment", "visual")
+				dialmap.manipulate("increment", "visual")
 			end)
 
 			map("v", "<C-x>", function()
-				map.manipulate("decrement", "visual")
+				dialmap.manipulate("decrement", "visual")
 			end)
 
 			map("v", "g<C-a>", function()
-				map.manipulate("increment", "gvisual")
+				dialmap.manipulate("increment", "gvisual")
 			end)
 
 			map("v", "g<C-x>", function()
-				map.manipulate("decrement", "gvisual")
+				dialmap.manipulate("decrement", "gvisual")
 			end)
 		end,
 	},

@@ -44,11 +44,6 @@ return {
 	sources = cmp.config.sources({
 		{
 			name = "nvim_lsp",
-			option = {
-				markdown_oxide = {
-					keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
-				},
-			},
 		},
 		{ name = "nvim_lsp_signature_help" },
 		{ name = "lazydev", group_index = 0 },
