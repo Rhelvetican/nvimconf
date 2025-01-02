@@ -34,6 +34,14 @@ return {
 	},
 
 	{
+		"chentoast/marks.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("marks").setup({})
+		end,
+	},
+
+	{
 		"lmantw/themify.nvim",
 		lazy = false,
 		priority = 9999,
@@ -124,7 +132,7 @@ return {
 			require("github-theme").setup({
 				options = {
 					styles = {
-						comments = "italic",
+						comments = "NONE",
 						functions = "italic",
 						keywords = "bold",
 						variables = "italic",
@@ -256,8 +264,6 @@ return {
 		"nvim-neotest/nvim-nio",
 	},
 
-	"tpope/vim-fugitive",
-
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
@@ -317,6 +323,10 @@ return {
 		},
 
 		config = function()
+			local map_nv = function(keymap, cmd)
+				map({ "n", "v" }, keymap, cmd)
+			end
+
 			require("lspsaga").setup({
 				ui = {
 					button = { "", "" },
@@ -324,25 +334,25 @@ return {
 			})
 
 			-- Code Actions
-			map({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+			map_nv("<leader>ca", "<cmd>Lspsaga code_action<CR>")
 
 			-- Finder
-			map({ "n", "v" }, "<leader>cf", "<cmd>Lspsaga finder<CR>")
+			map_nv("<leader>cf", "<cmd>Lspsaga finder<CR>")
 
 			-- Gotos
-			map({ "n", "v" }, "<leader>cg", "<cmd>Lspsaga goto_definition<CR>")
-			map({ "n", "v" }, "<leader>cp", "<cmd>Lspsaga peek_definition<CR>")
-			map({ "n", "v" }, "<leader>ctg", "<cmd>Lspsaga goto_type_definition<CR>")
-			map({ "n", "v" }, "<leader>ctp", "<cmd>Lspsaga peek_type_definition<CR>")
+			map_nv("<leader>cg", "<cmd>Lspsaga goto_definition<CR>")
+			map_nv("<leader>cp", "<cmd>Lspsaga peek_definition<CR>")
+			map_nv("<leader>ctg", "<cmd>Lspsaga goto_type_definition<CR>")
+			map_nv("<leader>ctp", "<cmd>Lspsaga peek_type_definition<CR>")
 
 			-- Utils
-			map({ "n", "v" }, "<leader>cdw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
-			map({ "n", "v" }, "<leader>cdl", "<cmd>Lspsaga show_line_diagnostics<CR>")
-			map({ "n", "v" }, "<leader>cdb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
-			map({ "n", "v" }, "<leader>cdc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
+			map_nv("<leader>cdw", "<cmd>Lspsaga show_workspace_diagnostics<CR>")
+			map_nv("<leader>cdl", "<cmd>Lspsaga show_line_diagnostics<CR>")
+			map_nv("<leader>cdb", "<cmd>Lspsaga show_buf_diagnostics<CR>")
+			map_nv("<leader>cdc", "<cmd>Lspsaga show_cursor_diagnostics<CR>")
 
-			map({ "n", "v" }, "<leader>cdn", "<cmd>Lspsaga diagnostic_jump_next<CR>")
-			map({ "n", "v" }, "<leader>cdN", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
+			map_nv("<leader>cdn", "<cmd>Lspsaga diagnostic_jump_next<CR>")
+			map_nv("<leader>cdN", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 		end,
 	},
 
@@ -350,12 +360,10 @@ return {
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
 		cmd = { "Mason", "MasonInstall" },
-		opts = {
-			ensure_installed = {
-				"ruff",
-				"basedpyright",
-			},
-		},
+		opts = function()
+			map({ "n", "v", "o" }, "<leader>m", "<cmd>Mason<CR>")
+			return {}
+		end,
 	},
 
 	{
@@ -676,29 +684,38 @@ return {
 		"monaqa/dial.nvim",
 
 		config = function()
+			local map = require("dial.map")
+
 			map("n", "<C-a>", function()
-				require("dial.map").manipulate("increment", "normal")
+				map.manipulate("increment", "normal")
 			end)
+
 			map("n", "<C-x>", function()
-				require("dial.map").manipulate("decrement", "normal")
+				map.manipulate("decrement", "normal")
 			end)
+
 			map("n", "g<C-a>", function()
-				require("dial.map").manipulate("increment", "gnormal")
+				map.manipulate("increment", "gnormal")
 			end)
+
 			map("n", "g<C-x>", function()
-				require("dial.map").manipulate("decrement", "gnormal")
+				map.manipulate("decrement", "gnormal")
 			end)
+
 			map("v", "<C-a>", function()
-				require("dial.map").manipulate("increment", "visual")
+				map.manipulate("increment", "visual")
 			end)
+
 			map("v", "<C-x>", function()
-				require("dial.map").manipulate("decrement", "visual")
+				map.manipulate("decrement", "visual")
 			end)
+
 			map("v", "g<C-a>", function()
-				require("dial.map").manipulate("increment", "gvisual")
+				map.manipulate("increment", "gvisual")
 			end)
+
 			map("v", "g<C-x>", function()
-				require("dial.map").manipulate("decrement", "gvisual")
+				map.manipulate("decrement", "gvisual")
 			end)
 		end,
 	},
