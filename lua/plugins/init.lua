@@ -375,7 +375,9 @@ return {
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
 		cmd = { "Mason", "MasonInstall" },
-		opts = require("plugins.configs.mason"),
+		opts = function()
+			require("plugins.configs.mason")
+		end,
 	},
 
 	{
@@ -659,10 +661,13 @@ return {
 				lsp = {
 					enabled = true,
 					actions = true,
-					completion = {
-						cmp = true,
-					},
+					completion = true,
 					hover = true,
+				},
+				completion = {
+					cmp = {
+						enabled = true,
+					},
 				},
 				autoload = true,
 				autoupdate = true,
