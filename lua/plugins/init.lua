@@ -23,7 +23,7 @@ return {
 
 	{
 		"kawre/leetcode.nvim",
-		build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+		build = ":TSUpdate html",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",
@@ -414,23 +414,6 @@ return {
 	},
 
 	{
-		"aznhe21/actions-preview.nvim",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-		},
-		config = function()
-			map({ "v", "n" }, "gf", require("actions-preview").code_actions)
-			require("actions-preview").setup({
-				diff = {
-					ctxlen = 2,
-				},
-
-				backend = { "nui" },
-			})
-		end,
-	},
-
-	{
 		"folke/which-key.nvim",
 		keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g" },
 		cmd = "WhichKey",
@@ -514,7 +497,7 @@ return {
 						end
 
 						switch_table["lua"] = function()
-							return "Writing cool lua code at" .. name
+							return "Writing cool lua code at " .. name
 						end
 
 						local oldschool = function()
@@ -567,21 +550,7 @@ return {
 
 		ft = { "rust" },
 
-		opts = {
-			server = {
-				default_settings = {
-					["rust-analyzer"] = {
-						cargo = {
-							allFeatures = true,
-							loadOutDirsFromCheck = true,
-							buildScripts = {
-								enable = true,
-							},
-						},
-					},
-				},
-			},
-		},
+		opts = {},
 
 		config = function()
 			local mason = require("mason-registry")

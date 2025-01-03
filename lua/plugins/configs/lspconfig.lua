@@ -25,3 +25,82 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "gr", buf.references, opts)
 	end,
 })
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local lspconfig = require("lspconfig")
+
+capabilities.textDocument.completion.completionItem = {
+	documentationFormat = { "markdown", "plaintext" },
+	snippetSupport = true,
+	preselectSupport = true,
+	insertReplaceSupport = true,
+	labelDetailsSupport = true,
+	deprecatedSupport = true,
+	commitCharactersSupport = true,
+	tagSupport = { valueSet = { 1 } },
+	resolveSupport = {
+		properties = {
+			"documentation",
+			"detail",
+			"additionalTextEdits",
+		},
+	},
+}
+capabilities.textDocument.semanticTokens = {
+	dynamicRegistration = true,
+	augmentsSyntaxTokens = true,
+	multilineTokenSupport = true,
+}
+
+lspconfig.lua_ls.setup({
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			diagnostics = { globals = { "vim" } },
+		},
+	},
+})
+
+lspconfig.ruff.setup({
+	capabilities = capabilities,
+})
+
+lspconfig.basedpyright.setup({
+	settings = {
+		basedpyright = {
+			disableOrganizeImports = true,
+			typeCheckingMode = "off",
+		},
+		python = {
+			analysis = {
+				ignore = { "*" },
+			},
+		},
+	},
+})
+
+lspconfig.taplo.setup({
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+})
+
+lspconfig.nushell.setup({
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+})
+
+lspconfig.clangd.setup({
+	capabilities = capabilities,
+	on_attach = function(client, buffer)
+		-- On attach
+	end,
+	filetypes = { "c", "cc", "h", "cpp", "hpp", "objc", "objcpp" },
+	cmd = { "clangd", "--background-index" },
+	root_dir = lspconfig.util.root_pattern(
+		".clangd",
+		".clang-tidy",
+		".clang-format",
+		"compile_commands.json",
+		"compile_flags.txt",
+		"configure.ac",
+		".git"
+	),
+})
