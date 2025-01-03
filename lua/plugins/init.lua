@@ -219,10 +219,6 @@ return {
 	},
 
 	{
-		"nvim-neotest/nvim-nio",
-	},
-
-	{
 		"nvim-neotest/neotest",
 		dependencies = {
 			"nvim-neotest/nvim-nio",
@@ -409,60 +405,7 @@ return {
 		version = "*",
 		build = ":Cord update",
 		opts = function()
-			require("cord").setup({
-				editor = {
-					client = "neovim",
-					tooltip = "The Supreme Text Editor",
-				},
-
-				text = {
-					editing = function(opts)
-						local switch_table = {}
-						local type, name = opts.filetype, opts.filename
-
-						switch_table["rust"] = function()
-							return "Oxidizing " .. name
-						end
-
-						switch_table["lua"] = function()
-							return "Writing cool lua code at " .. name
-						end
-
-						local oldschool = function()
-							return "Being oldschool in " .. name
-						end
-
-						switch_table["c"] = oldschool
-						switch_table["cpp"] = oldschool
-						switch_table["h"] = oldschool
-						switch_table["hpp"] = oldschool
-						switch_table["objc"] = oldschool
-						switch_table["objcpp"] = oldschool
-
-						switch_table["zig"] = function()
-							return "Writing Zig at " .. name
-						end
-
-						local handle = switch_table[type]
-
-						if handle then
-							return handle()
-						else
-							return "Editing " .. opts.filename
-						end
-					end,
-
-					docs = "Reading docs...",
-					dashboard = "At home...",
-					vcs = "Managing git...",
-				},
-
-				assets = {
-					["Cargo.toml"] = {
-						text = "Managing Cargo dependencies...",
-					},
-				},
-			})
+			require("plugins.configs.cord")
 		end,
 	},
 
