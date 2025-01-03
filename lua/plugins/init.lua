@@ -303,11 +303,11 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 
-		config = function()
-			require("neotest").setup({
-				require("rustaceanvim.neotest"),
-			})
-		end,
+		opts = {
+			adapter = {
+				["rustaceanvim.neotest"] = {},
+			},
+		},
 	},
 
 	{
@@ -557,11 +557,32 @@ return {
 
 	{
 		"mrcjkb/rustaceanvim",
+
 		version = "^5",
 		lazy = false,
+
 		dependencies = {
 			"rust-lang/rust.vim",
 		},
+
+		ft = { "rust" },
+
+		opts = {
+			server = {
+				default_settings = {
+					["rust-analyzer"] = {
+						cargo = {
+							allFeatures = true,
+							loadOutDirsFromCheck = true,
+							buildScripts = {
+								enable = true,
+							},
+						},
+					},
+				},
+			},
+		},
+
 		config = function()
 			local mason = require("mason-registry")
 			local codelldb = mason.get_package("codelldb")

@@ -21,6 +21,9 @@ require("nvim-treesitter.configs").setup({
 		"nu",
 		"gitignore",
 		"markdown",
+		"json",
+		"ron",
+		"toml",
 	},
 
 	autotag = { enable = true },
