@@ -104,21 +104,20 @@ return {
 
 	{
 		"folke/snacks.nvim",
-		priority = 9998,
-		dependencies = {
-			"lmantw/themify.nvim",
-		},
-		lazy = false,
+		event = "VimEnter",
 		opts = {
 			bigfile = { enabled = true },
-			dashboard = { enabled = true },
 			indent = { enabled = true, animate = { enabled = false }, chunk = { enabled = true } },
 			input = { enabled = true },
-			notifier = { enabled = true },
 			quickfile = { enabled = true },
 			statuscolumn = { enabled = true },
 			words = { enabled = true },
 		},
+	},
+
+	{
+		"j-hui/fidget.nvim",
+		opts = {},
 	},
 
 	{
