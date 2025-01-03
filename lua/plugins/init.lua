@@ -22,15 +22,30 @@ return {
 	},
 
 	{
-		"rmagatti/auto-session",
-		lazy = false,
-
-		opts = {
-			supressed_dirs = {
-				"~/Projects/",
-				"~/Downloads/",
-			},
+		"kawre/leetcode.nvim",
+		build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
 		},
+		opts = function()
+			local opts = {}
+
+			opts.arg = "leet"
+			opts.lang = "rust"
+
+			map({ "n", "v", "o" }, "<leader>ls", "<cmd>Leet submit<CR>")
+			map({ "n", "v", "o" }, "<leader>ll", "<cmd>Leet list<CR>")
+			map({ "n", "v", "o" }, "<leader>ld", "<cmd>Leet daily<CR>")
+			map({ "n", "v", "o" }, "<leader>le", "<cmd>Leet exit<CR>")
+			map({ "n", "v", "o" }, "<leader>lr", "<cmd>Leet random<CR>")
+			map({ "n", "v", "o" }, "<leader>lb", "<cmd>Leet reset<CR>")
+			map({ "n", "v", "o" }, "<leader>li", "<cmd>Leet inject<CR>")
+			map({ "n", "v", "o" }, "<leader>lt", "<cmd>Leet desc toggle<CR>")
+
+			return opts
+		end,
 	},
 
 	{

@@ -13,8 +13,6 @@ return {
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
-
-		-- luasnip
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -46,8 +44,8 @@ return {
 			name = "nvim_lsp",
 		},
 		{ name = "nvim_lsp_signature_help" },
-		{ name = "lazydev", group_index = 0 },
 		{ name = "crates" },
+		{ name = "lazydev", group_index = 0 },
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{
