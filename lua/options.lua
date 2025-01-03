@@ -35,10 +35,6 @@ g.loaded_node_provider = 0
 g.loaded_perl_provider = 0
 g.loaded_ruby_provider = 0
 
--- add binaries installed by mason.nvim to path
-local is_windows = vim.uv.os_uname().sysname == "Windows_NT"
-vim.env.PATH = vim.env.PATH .. (is_windows and ";" or ":") .. vim.fn.stdpath("data") .. "/mason/bin"
-
 vim.api.nvim_set_hl(0, "IndentLine", { link = "Comment" })
 vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

@@ -20,4 +20,8 @@ config.ensure_installed = {
 
 map({ "n", "o", "v" }, "<leader>m", "<cmd>Mason<CR>")
 
+-- add binaries installed by mason.nvim to path
+local is_windows = vim.uv.os_uname().sysname == "Windows_NT"
+vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and "; " or ":") .. vim.env.PATH
+
 require("mason").setup(config)
