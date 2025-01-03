@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 local map = vim.keymap.set
 
 return {
@@ -57,37 +56,10 @@ return {
 	},
 
 	{
-		"lmantw/themify.nvim",
-		lazy = false,
-		priority = 9999,
-
-		config = function()
-			require("themify").setup(require("plugins.themes"))
-			map({ "n", "v", "o" }, "<leader>t", "<Cmd>Themify<CR>")
-		end,
-	},
-
-	{
 		"lewis6991/satellite.nvim",
 		config = function()
 			require("satellite").setup({})
 		end,
-	},
-
-	{
-		"folke/snacks.nvim",
-		priority = 9999,
-		lazy = false,
-		opts = {
-			bigfile = { enabled = true },
-			dashboard = { enabled = true },
-			indent = { enabled = true, animate = { enabled = false }, chunk = { enabled = true } },
-			input = { enabled = true },
-			notifier = { enabled = true },
-			quickfile = { enabled = true },
-			statuscolumn = { enabled = true },
-			words = { enabled = true },
-		},
 	},
 
 	{
@@ -118,8 +90,8 @@ return {
 					dap = true,
 					mason = true,
 					dap_ui = true,
-					snacks = true,
 					aerial = true,
+					snacks = true,
 					lsp_saga = true,
 					telescope = true,
 					which_key = true,
@@ -131,65 +103,22 @@ return {
 	},
 
 	{
-		"marko-cerovac/material.nvim",
-
-		config = function()
-			require("material").setup({
-				styles = {
-					keywords = { italic = true },
-					variables = { italic = true },
-					types = { italic = true },
-					comments = { italic = true },
-				},
-
-				plugins = {
-					"dap",
-					"fidget",
-					"indent-blankline",
-					"nvim-cmp",
-					"lspsaga",
-					"nvim-web-devicons",
-					"telescope",
-					"which-key",
-				},
-
-				lualine_style = "stealth",
-			})
-		end,
-	},
-
-	{
-		"projekt0n/github-nvim-theme",
-		priority = 9999,
-		config = function()
-			require("github-theme").setup({
-				options = {
-					styles = {
-						functions = "italic",
-						keywords = "bold",
-						variables = "italic",
-						types = "italic,bold",
-						numbers = "bold",
-						constants = "bold",
-						strings = "italic",
-					},
-
-					modules = {
-						cmp = true,
-						whichkey = true,
-						treesitter = true,
-						treesitter_context = true,
-						lsp_semantic_tokens = true,
-						gitsigns = true,
-						dapui = true,
-						native_lsp = true,
-						telescope = true,
-						fidget = true,
-						mini = true,
-					},
-				},
-			})
-		end,
+		"folke/snacks.nvim",
+		priority = 9998,
+		dependencies = {
+			"lmantw/themify.nvim",
+		},
+		lazy = false,
+		opts = {
+			bigfile = { enabled = true },
+			dashboard = { enabled = true },
+			indent = { enabled = true, animate = { enabled = false }, chunk = { enabled = true } },
+			input = { enabled = true },
+			notifier = { enabled = true },
+			quickfile = { enabled = true },
+			statuscolumn = { enabled = true },
+			words = { enabled = true },
+		},
 	},
 
 	{
@@ -550,9 +479,10 @@ return {
 
 		ft = { "rust" },
 
-		opts = {},
-
 		config = function()
+			local is_windows = vim.uv.os_uname().sysname == "Windows_NT"
+			vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and "; " or ":") .. vim.env.PATH
+
 			local mason = require("mason-registry")
 			local codelldb = mason.get_package("codelldb")
 			local ext_path = codelldb:get_install_path() .. "/extension/"
