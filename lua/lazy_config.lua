@@ -1,6 +1,4 @@
 return {
-	install = { colorscheme = { "mellow" } },
-
 	performance = {
 		rtp = {
 			disabled_plugins = {

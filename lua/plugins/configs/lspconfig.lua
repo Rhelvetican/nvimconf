@@ -1,8 +1,6 @@
 local map = vim.keymap.set
 local buf = vim.lsp.buf
 
-local rust_diagnostic = "bacon"
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
 	callback = function(ev)
@@ -29,78 +27,51 @@ vim.api.nvim_create_autocmd("LspAttach", {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local lspconfig = require("lspconfig")
 
-capabilities.textDocument.completion.completionItem = {
-	documentationFormat = { "markdown", "plaintext" },
-	snippetSupport = true,
-	preselectSupport = true,
-	insertReplaceSupport = true,
-	labelDetailsSupport = true,
-	deprecatedSupport = true,
-	commitCharactersSupport = true,
-	tagSupport = { valueSet = { 1 } },
-	resolveSupport = {
-		properties = {
-			"documentation",
-			"detail",
-			"additionalTextEdits",
-		},
-	},
-}
-capabilities.textDocument.semanticTokens = {
-	dynamicRegistration = true,
-	augmentsSyntaxTokens = true,
-	multilineTokenSupport = true,
-}
-
-lspconfig.lua_ls.setup({
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			diagnostics = { globals = { "vim" } },
-		},
-	},
-})
-
-lspconfig.ruff.setup({
-	capabilities = capabilities,
-})
-
-lspconfig.basedpyright.setup({
-	settings = {
-		basedpyright = {
-			disableOrganizeImports = true,
-			typeCheckingMode = "off",
-		},
-		python = {
-			analysis = {
-				ignore = { "*" },
+capabilities.textDocument = {
+	completion = {
+		completionItem = {
+			documentationFormat = { "markdown", "plaintext" },
+			snippetSupport = true,
+			preselectSupport = true,
+			insertReplaceSupport = true,
+			labelDetailsSupport = true,
+			deprecatedSupport = true,
+			commitCharactersSupport = true,
+			tagSupport = { valueSet = { 1 } },
+			resolveSupport = {
+				properties = {
+					"documentation",
+					"detail",
+					"additionalTextEdits",
+				},
 			},
 		},
+
+		dynamicRegistration = true,
 	},
-})
 
-lspconfig.taplo.setup({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
-})
+	inlayHint = {
+		dynamicRegistration = true,
+	},
 
-lspconfig.nushell.setup({
-	capabilities = require("cmp_nvim_lsp").default_capabilities(),
-})
+	documentHighlight = {
+		dynamicRegistration = true,
+	},
 
-lspconfig.clangd.setup({
-	capabilities = capabilities,
-	on_attach = function(client, buffer)
-		-- On attach
-	end,
-	filetypes = { "c", "cc", "h", "cpp", "hpp", "objc", "objcpp" },
-	cmd = { "clangd", "--background-index" },
-	root_dir = lspconfig.util.root_pattern(
-		".clangd",
-		".clang-tidy",
-		".clang-format",
-		"compile_commands.json",
-		"compile_flags.txt",
-		"configure.ac",
-		".git"
-	),
-})
+	codeLens = {
+		dynamicRegistration = true,
+	},
+
+	codeAction = {
+		dynamicRegistration = true,
+	},
+}
+
+lspconfig["bacon-ls"].setup({ capabilities = capabilities })
+lspconfig["clangd"].setup({ capabilities = capabilities })
+lspconfig["lua_ls"].setup({ capabilities = capabilities })
+lspconfig["pylyzer"].setup({ capabilities = capabilities })
+lspconfig["basedpyright"].setup({ capabilities = capabilities })
+lspconfig["ruff"].setup({ capabilities = capabilities })
+lspconfig["rust-analyzer"].setup({ capabilities = capabilities })
+lspconfig["taplo"].setup({ capabilities = capabilities })

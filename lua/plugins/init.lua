@@ -422,12 +422,8 @@ return {
 		ft = { "rust" },
 
 		config = function()
-			local is_windows = vim.uv.os_uname().sysname == "Windows_NT"
-			vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin" .. (is_windows and "; " or ":") .. vim.env.PATH
-
-			local mason = require("mason-registry")
-			local codelldb = mason.get_package("codelldb")
-			local ext_path = codelldb:get_install_path() .. "/extension/"
+			local codelldb = require("mason-registry").get_package("codelldb"):get_install_path()
+			local ext_path = codelldb .. "/extension/"
 			local codelldb_path = ext_path .. "adapter/codelldb"
 			local liblldb_path = ext_path .. "lldb/lib/liblldb.dylib"
 
