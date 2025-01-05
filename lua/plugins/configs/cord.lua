@@ -33,6 +33,10 @@ require("cord").setup({
 				return "Writing Zig at " .. name
 			end
 
+			languages["python"] = function()
+				return "Slithering around at " .. name
+			end
+
 			local handle = languages[type]
 
 			if handle then
@@ -49,6 +53,10 @@ require("cord").setup({
 	assets = {
 		["Cargo.toml"] = {
 			text = "Managing Cargo dependencies...",
+		},
+
+		["pyproject.toml"] = {
+			text = "Managing Python project...",
 		},
 	},
 })
