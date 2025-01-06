@@ -11,21 +11,12 @@ local lspconfig = require("lspconfig")
 capabilities.textDocument = {
 	completion = {
 		completionItem = {
-			documentationFormat = { "markdown", "plaintext" },
 			snippetSupport = true,
 			preselectSupport = true,
 			insertReplaceSupport = true,
 			labelDetailsSupport = true,
 			deprecatedSupport = true,
 			commitCharactersSupport = true,
-			tagSupport = { valueSet = { 1 } },
-			resolveSupport = {
-				properties = {
-					"documentation",
-					"detail",
-					"additionalTextEdits",
-				},
-			},
 		},
 
 		dynamicRegistration = true,
@@ -36,11 +27,11 @@ capabilities.textDocument = {
 	},
 }
 
-lspconfig.bacon_ls.setup({ capabilities = capabilities })
-lspconfig.clangd.setup({ capabilities = capabilities })
-lspconfig.lua_ls.setup({ capabilities = capabilities })
-lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-lspconfig.taplo.setup({ capabilities = capabilities })
+lspconfig.bacon_ls.setup({})
+lspconfig.clangd.setup({})
+lspconfig.taplo.setup({})
+lspconfig.lua_ls.setup({})
+lspconfig.harper_ls.setup({})
 
 lspconfig.basedpyright.setup({
 	settings = {
@@ -62,6 +53,7 @@ lspconfig.basedpyright.setup({
 	},
 	capabilities = capabilities,
 })
+
 lspconfig.ruff.setup({
 	on_attach = function(client, bufnr)
 		client.server_capabilities.hoverProvider = false

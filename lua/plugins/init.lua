@@ -424,18 +424,7 @@ return {
 		ft = { "rust" },
 
 		config = function()
-			local codelldb = require("mason-registry").get_package("codelldb"):get_install_path()
-			local ext_path = codelldb .. "/extension/"
-			local codelldb_path = ext_path .. "adapter/codelldb"
-			local liblldb_path = ext_path .. "lldb/lib/liblldb.dylib"
-
-			local cfg = require("rustaceanvim.config")
-
-			vim.g.rustaceanvim = {
-				dap = {
-					adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-				},
-			}
+			require("plugins.configs.rustaceanvim")
 		end,
 	},
 
