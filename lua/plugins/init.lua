@@ -65,18 +65,6 @@ return {
 	},
 
 	{
-		"mmuldo/spotify.nvim",
-
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-
-		config = function()
-			require("plugins.configs.spotify")
-		end,
-	},
-
-	{
 		"lewis6991/satellite.nvim",
 		config = function()
 			require("satellite").setup({})
