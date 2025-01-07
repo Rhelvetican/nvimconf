@@ -3,12 +3,19 @@ local map = vim.keymap.set
 local cfg = require("rustaceanvim.config")
 
 vim.g.rustaceanvim = function()
-	local codelldb = require("mason-registry").get_package("codelldb"):get_install_path()
+	local registry = require("mason-registry")
+
+	local codelldb = registry.get_package("codelldb"):get_install_path()
 	local ext_path = codelldb .. "/extension/"
 	local codelldb_path = ext_path .. "adapter/codelldb"
 	local liblldb_path = ext_path .. "lldb/lib/liblldb.dylib"
 
+	local ra = registry.get_package("rust-analyzer")
+	local fname = ra:get_receipt():get().links.bin["rust-analyzer"]
+	local cmd = { ("%s/%s"):format(ra:get_install_path(), fname or "rust-analyzer") }
+
 	return {
+		server = { cmd = cmd },
 		dap = {
 			adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
 		},

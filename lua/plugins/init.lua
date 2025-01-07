@@ -21,6 +21,15 @@ return {
 	},
 
 	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		config = function()
+			map({ "n", "v", "o" }, "<leader>tt", "<cmd>ToggleTerm<CR>")
+			require("toggleterm").setup({})
+		end,
+	},
+
+	{
 		"kawre/leetcode.nvim",
 		build = ":TSUpdate html",
 		dependencies = {
@@ -253,16 +262,14 @@ return {
 					lualine_b = {
 						{ "branch", color = { gui = "bold" } },
 						{ "diff", color = { gui = "bold" } },
-						{
-							"diagnostics",
-							color = { gui = "bold" },
-						},
+						{ "diagnostics", color = { gui = "bold" } },
 					},
 					lualine_c = { { "filename", color = { gui = "bold" } } },
 					lualine_x = { "encoding", "fileformat", "filetype" },
 					lualine_y = { "progress" },
 					lualine_z = { { "location", color = { gui = "bold" } } },
 				},
+				extensions = { "toggleterm" },
 			})
 		end,
 	},
@@ -325,7 +332,14 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"j-hui/fidget.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			{
+				"williamboman/mason-lspconfig.nvim",
+				config = function()
+					require("mason-lspconfig").setup_handlers({
+						["rust_analyzer"] = function() end,
+					})
+				end,
+			},
 		},
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
