@@ -1,4 +1,4 @@
-./.vscode
-./test
-./lua/plugins/configs/spotify.lua
+/.vscode
+/test
+lua/plugins/configs/spotify.lua
 *.log
