@@ -27,7 +27,6 @@ capabilities.textDocument = {
 	},
 }
 
-lspconfig.bacon_ls.setup({})
 lspconfig.clangd.setup({})
 lspconfig.taplo.setup({})
 lspconfig.lua_ls.setup({})

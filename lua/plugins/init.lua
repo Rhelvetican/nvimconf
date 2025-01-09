@@ -97,6 +97,7 @@ return {
 				},
 
 				integrations = {
+					blink_cmp = true,
 					cmp = true,
 					dap = true,
 					mason = true,
@@ -150,42 +151,10 @@ return {
 
 	{
 		"saghen/blink.cmp",
-		dependencies = { "rafamadriz/friendly-snippets" },
+		dependencies = { "rafamadriz/friendly-snippets", "moyiz/blink-emoji.nvim", "Kaiser-Yang/blink-cmp-dictionary" },
 		version = "*",
 
-		opts = {
-			keymap = {
-				preset = "enter",
-				cmdline = { preset = "default" },
-			},
-
-			appearance = {
-				use_nvim_cmp_as_default = true,
-				nerd_font_variant = "mono",
-			},
-
-			completion = {
-				keyword = { range = "full" },
-			},
-
-			documentation = {
-				auto_show = true,
-				auto_show_delay_ms = 500,
-			},
-
-			signature = { enabled = true, window = { treesitter_highlighting = false } },
-
-			sources = {
-				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-				providers = {
-					lazydev = {
-						name = "LazyDev",
-						module = "lazydev.integrations.blink",
-						score_offset = 100,
-					},
-				},
-			},
-		},
+		opts = require("plugins.configs.blink"),
 
 		opts_extend = { "sources.default" },
 	},
@@ -326,6 +295,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		build = ":MasonUpdate",
+		lazy = false,
 		cmd = { "Mason", "MasonInstall" },
 		opts = function()
 			require("plugins.configs.mason")
