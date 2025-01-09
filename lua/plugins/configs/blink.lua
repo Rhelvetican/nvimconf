@@ -40,6 +40,22 @@ return {
 				name = "Dict",
 				module = "blink-cmp-dictionary",
 				score_offset = -1,
+
+				opts = {
+					prefix_min_len = 1,
+					output_separator = " ",
+					get_command = {
+						"rg",
+						"--color=never",
+						"--no-line-number",
+						"--no-messages",
+						"--no-filename",
+						"--ignore-case",
+						"--",
+						"${prefix}",
+						vim.fn.stdpath("config") .. "/dict/en_dict.txt",
+					},
+				},
 			},
 		},
 	},

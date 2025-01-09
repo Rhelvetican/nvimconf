@@ -6,6 +6,8 @@ vim.g.mapleader = ","
 map({ "n", "v", "o" }, "<C-s>", "<cmd> w <CR>")
 map("n", "g?", "<cmd>lua vim.diagnostic.open_float()<CR>")
 map({ "n", "v", "o" }, "<C-c>", "<cmd> %y+ <CR>") -- copy whole filecontent
+map({ "n", "v", "o" }, "<leader>ya", "<cmd> %y+ <CR>")
+map({ "n", "v", "o" }, "<leader>da", "<cmd> %d+ <CR>")
 map({ "n", "v", "o" }, "tb", "<cmd>tab term<CR>")
 
 -- telescope
