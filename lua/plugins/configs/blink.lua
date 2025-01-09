@@ -1,7 +1,7 @@
 return {
 	keymap = {
 		preset = "enter",
-		cmdline = { preset = "default" },
+		cmdline = { preset = "super-tab" },
 	},
 
 	appearance = {

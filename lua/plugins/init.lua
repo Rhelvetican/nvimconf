@@ -155,7 +155,6 @@ return {
 		version = "*",
 
 		opts = require("plugins.configs.blink"),
-
 		opts_extend = { "sources.default" },
 	},
 
