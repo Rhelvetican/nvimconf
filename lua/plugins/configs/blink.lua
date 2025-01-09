@@ -22,7 +22,7 @@ return {
 	signature = { enabled = true, window = { treesitter_highlighting = false } },
 
 	sources = {
-		default = { "lazydev", "lsp", "path", "snippets", "buffer", "crates", "emoji", "dictionary" },
+		default = { "lazydev", "lsp", "path", "snippets", "buffer", "crates", "dictionary" },
 		providers = {
 			lazydev = {
 				name = "LazyDev",
@@ -40,12 +40,6 @@ return {
 				name = "Dict",
 				module = "blink-cmp-dictionary",
 				score_offset = -1,
-			},
-
-			emoji = {
-				name = "Emoji",
-				module = "blink-emoji",
-				opts = { insert = true },
 			},
 		},
 	},

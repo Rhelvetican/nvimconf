@@ -154,7 +154,6 @@ return {
 		dependencies = {
 			"saghen/blink.compat",
 			"rafamadriz/friendly-snippets",
-			"moyiz/blink-emoji.nvim",
 			"Kaiser-Yang/blink-cmp-dictionary",
 		},
 		version = "*",
