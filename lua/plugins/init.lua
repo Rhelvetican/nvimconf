@@ -151,7 +151,12 @@ return {
 
 	{
 		"saghen/blink.cmp",
-		dependencies = { "rafamadriz/friendly-snippets", "moyiz/blink-emoji.nvim", "Kaiser-Yang/blink-cmp-dictionary" },
+		dependencies = {
+			"saghen/blink.compat",
+			"rafamadriz/friendly-snippets",
+			"moyiz/blink-emoji.nvim",
+			"Kaiser-Yang/blink-cmp-dictionary",
+		},
 		version = "*",
 
 		opts = require("plugins.configs.blink"),
