@@ -1,6 +1,6 @@
 return {
 	keymap = {
-		preset = "enter",
+		preset = "super-tab",
 		cmdline = { preset = "super-tab" },
 	},
 

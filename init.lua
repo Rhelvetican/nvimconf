@@ -20,8 +20,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = require("plugins")
+local themes = require("plugins.themes")
 
-require("lazy").setup(plugins, require("lazy_config"))
+require("lazy").setup({themes, plugins}, require("lazy_config"))
 
 if vim.g.neovide then
 	vim.opt.linespace = -3
