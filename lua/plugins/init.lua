@@ -1,6 +1,5 @@
 local map = vim.keymap.set
-
-return {
+local M = {
 	{
 		"nvim-lua/plenary.nvim",
 		lazy = true,
@@ -111,6 +110,13 @@ return {
 					treesitter_context = true,
 				},
 			})
+		end,
+	},
+
+	{
+		"olimorris/onedarkpro.nvim",
+		config = function()
+			require("onedarkpro").setup({})
 		end,
 	},
 
@@ -558,39 +564,9 @@ return {
 		"monaqa/dial.nvim",
 
 		config = function()
-			local dialmap = require("dial.map")
-
-			map("n", "<C-a>", function()
-				dialmap.manipulate("increment", "normal")
-			end)
-
-			map("n", "<C-x>", function()
-				dialmap.manipulate("decrement", "normal")
-			end)
-
-			map("n", "g<C-a>", function()
-				dialmap.manipulate("increment", "gnormal")
-			end)
-
-			map("n", "g<C-x>", function()
-				dialmap.manipulate("decrement", "gnormal")
-			end)
-
-			map("v", "<C-a>", function()
-				dialmap.manipulate("increment", "visual")
-			end)
-
-			map("v", "<C-x>", function()
-				dialmap.manipulate("decrement", "visual")
-			end)
-
-			map("v", "g<C-a>", function()
-				dialmap.manipulate("increment", "gvisual")
-			end)
-
-			map("v", "g<C-x>", function()
-				dialmap.manipulate("decrement", "gvisual")
-			end)
+			require("plugins.configs.dial")
 		end,
 	},
 }
+
+return M
