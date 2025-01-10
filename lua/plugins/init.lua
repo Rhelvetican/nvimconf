@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+
 local M = {
 	{
 		"nvim-lua/plenary.nvim",
