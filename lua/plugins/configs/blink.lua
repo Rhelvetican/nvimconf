@@ -22,7 +22,7 @@ return {
 	signature = { enabled = true, window = { treesitter_highlighting = false } },
 
 	sources = {
-		default = { "lazydev", "lsp", "path", "snippets", "buffer", "crates", "dictionary" },
+		default = { "lazydev", "lsp", "path", "snippets", "buffer", "crates" },
 		providers = {
 			lazydev = {
 				name = "LazyDev",
@@ -34,28 +34,6 @@ return {
 				name = "crates",
 				module = "blink.compat.source",
 				score_offset = 50,
-			},
-
-			dictionary = {
-				name = "Dict",
-				module = "blink-cmp-dictionary",
-				score_offset = -1,
-
-				opts = {
-					prefix_min_len = 1,
-					output_separator = " ",
-					get_command = {
-						"rg",
-						"--color=never",
-						"--no-line-number",
-						"--no-messages",
-						"--no-filename",
-						"--ignore-case",
-						"--",
-						"${prefix}",
-						vim.fn.stdpath("config") .. "/dict/en_dict.txt",
-					},
-				},
 			},
 		},
 	},

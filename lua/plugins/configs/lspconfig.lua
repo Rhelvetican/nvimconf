@@ -30,7 +30,31 @@ capabilities.textDocument = {
 lspconfig.clangd.setup({})
 lspconfig.taplo.setup({})
 lspconfig.lua_ls.setup({})
-lspconfig.harper_ls.setup({})
+lspconfig.harper_ls.setup({
+	filetypes = {
+		"c",
+		"cpp",
+		"cs",
+		"gitcommit",
+		"go",
+		"html",
+		"java",
+		"javascript",
+		"lua",
+		"markdown",
+		"nix",
+		"python",
+		"ruby",
+		"rust",
+		"swift",
+		"toml",
+		"typescript",
+		"typescriptreact",
+		"haskell",
+		"cmake",
+		"text",
+	},
+})
 
 lspconfig.basedpyright.setup({
 	settings = {
