@@ -366,7 +366,6 @@ local M = {
 
 	{
 		"mrcjkb/rustaceanvim",
-
 		version = "^5",
 		lazy = false,
 
@@ -378,6 +377,43 @@ local M = {
 
 		config = function()
 			require("plugins.configs.rustaceanvim")
+		end,
+	},
+
+	{
+		"elixir-tools/elixir-tools.nvim",
+		version = "*",
+
+		event = { "BufReadPre", "BufNewFile" },
+
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+
+		ft = { "elixir" },
+
+		config = function()
+			local elixir = require("elixir")
+			local elixirls = require("elixir.elixirls")
+
+			elixir.setup({
+				nextls = { enable = true },
+				elixirls = {
+					enable = true,
+					settings = elixirls.settings({
+						dialyzerEnabled = false,
+						enableTestLenses = false,
+					}),
+					on_attach = function(_, _)
+						map("n", "<space>fp", "<cmd>:ElixirFromPipe<cr>", { buffer = true, noremap = true })
+						map("n", "<space>tp", "<cmd>:ElixirToPipe<cr>", { buffer = true, noremap = true })
+						map("v", "<space>em", "<cmd>:ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+					end,
+				},
+				projectionist = {
+					enable = true,
+				},
+			})
 		end,
 	},
 
@@ -482,8 +518,9 @@ local M = {
 					hover = true,
 				},
 				completion = {
-					cmp = {
+					crates = {
 						enabled = true,
+						max_results = 8,
 					},
 				},
 				autoload = true,

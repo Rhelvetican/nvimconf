@@ -22,18 +22,12 @@ return {
 	signature = { enabled = true, window = { treesitter_highlighting = false } },
 
 	sources = {
-		default = { "lazydev", "lsp", "path", "snippets", "buffer", "crates" },
+		default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 		providers = {
 			lazydev = {
 				name = "LazyDev",
 				module = "lazydev.integrations.blink",
 				score_offset = 100,
-			},
-
-			crates = {
-				name = "crates",
-				module = "blink.compat.source",
-				score_offset = 50,
 			},
 		},
 	},
