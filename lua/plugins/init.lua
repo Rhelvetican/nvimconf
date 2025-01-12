@@ -127,17 +127,10 @@ local M = {
 	},
 
 	{
-		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "VeryLazy",
-		priority = 1000,
-		config = function()
-			require("tiny-inline-diagnostic").setup({
-				preset = "classic",
-				options = {
-					softwrap = 32,
-				},
-			})
-		end,
+		"folke/trouble.nvim",
+		opts = {},
+		cmd = "Trouble",
+		keys = require("plugins.configs.trouble"),
 	},
 
 	{
