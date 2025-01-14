@@ -39,14 +39,16 @@ require("cord").setup({
 			if handle then
 				return handle(opts)
 			else
-				return "Editing " .. name
+				return "Editing " .. opts.filename
 			end
 		end,
 
 		diagnostics = function(opts)
 			return "Fixing like, "
 				.. vim.diagnostic.count(0, { severity = { min = vim.diagnostic.severity.WARN } })
-				.. " bugs."
+				.. " bugs in "
+				.. opts.filename
+				.. "."
 		end,
 
 		docs = "Reading docs...",
