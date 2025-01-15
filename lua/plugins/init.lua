@@ -82,14 +82,7 @@ local M = {
 	{
 		"folke/snacks.nvim",
 		event = "VimEnter",
-		opts = {
-			bigfile = { enabled = true },
-			indent = { enabled = true, animate = { enabled = false }, chunk = { enabled = true } },
-			input = { enabled = true },
-			quickfile = { enabled = true },
-			statuscolumn = { enabled = true },
-			words = { enabled = true },
-		},
+		opts = require("plugins.configs.snacks"),
 	},
 
 	{
