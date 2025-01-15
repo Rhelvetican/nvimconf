@@ -51,6 +51,13 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
 vim.api.nvim_set_var("t_Ce", "\\e[4:0m")
 
+vim.api.nvim_set_hl(0, "SpellBad", {
+	undercurl = true,
+})
+vim.api.nvim_set_hl(0, "SpellCap", {
+	undercurl = true,
+})
+
 vim.diagnostic.config({
 	virtual_text = true,
 	update_in_insert = true,

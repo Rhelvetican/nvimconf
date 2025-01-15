@@ -1,10 +1,3 @@
-local map = vim.keymap.set
-local buf = vim.lsp.buf
-
-local on_attach = function(_, bufnr)
-	local opts = { noremap = true, silent = true, buffer = bufnr }
-end
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local lspconfig = require("lspconfig")
 
@@ -78,8 +71,7 @@ lspconfig.basedpyright.setup({
 })
 
 lspconfig.ruff.setup({
-	on_attach = function(client, bufnr)
+	on_attach = function(client, _)
 		client.server_capabilities.hoverProvider = false
-		on_attach(client, bufnr)
 	end,
 })
