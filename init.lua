@@ -22,7 +22,7 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = require("plugins")
 local themes = require("plugins.themes")
 
-require("lazy").setup({themes, plugins}, require("lazy_config"))
+require("lazy").setup({ themes, plugins }, require("lazy_config"))
 
 if vim.g.neovide then
 	vim.opt.linespace = -3
@@ -48,8 +48,11 @@ sign({ name = "DiagnosticSignInfo", text = "" })
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+vim.api.nvim_set_var("t_Cs", "\\e[4:3m")
+vim.api.nvim_set_var("t_Ce", "\\e[4:0m")
+
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 	update_in_insert = true,
 	signs = true,
 	underline = true,
