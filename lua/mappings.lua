@@ -5,10 +5,11 @@ vim.g.mapleader = ","
 -- general mappings
 map({ "n", "v", "o" }, "<C-s>", "<cmd> w <CR>")
 map("n", "g?", "<cmd>lua vim.diagnostic.open_float()<CR>")
-map({ "n", "v", "o" }, "<C-c>", "<cmd> %y+ <CR>") -- copy whole filecontent
+map({ "n", "v", "o" }, "<C-c>", "<cmd> %y+ <CR>")
 map({ "n", "v", "o" }, "<leader>ya", "<cmd> %y+ <CR>")
 map({ "n", "v", "o" }, "<leader>da", "<cmd> %d+ <CR>")
 map({ "n", "v", "o" }, "tb", "<cmd>tab term<CR>")
+map({ "n", "v", "o" }, "tt", "<cmd> tab terminal <CR>")
 
 -- telescope
 map("n", "tff", "<cmd> Tele find_files <CR>")
