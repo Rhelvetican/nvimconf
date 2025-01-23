@@ -43,17 +43,27 @@ require("cord").setup({
 			end
 		end,
 
-		diagnostics = function(opts)
-			return "Fixing like, "
-				.. vim.diagnostic.count(0, { severity = { min = vim.diagnostic.severity.WARN } })
-				.. " bugs in "
-				.. opts.filename
-				.. "."
+		workspace = function(opts)
+			if opts.diagnostics then
+				local diagnostics = opts.diagnostics(opts)
+			end
+
+			if diagnostics ~= nil then
+				if diagnostics > 1 then
+					return "In " .. opts.workspace_name .. " with " .. diagnostics .. " problems."
+				else
+					return "In " .. opts.workspace_name .. " with " .. diagnostics .. " problem."
+				end
+			else
+				return "In " .. opts.workspace_name
+			end
 		end,
 
 		docs = "Reading docs...",
 		vcs = "Managing git...",
 	},
+
+	plugins = { { "cord.plugins.diagnostics", config = { scope = "workspace" } } },
 
 	assets = {
 		["Cargo.toml"] = {

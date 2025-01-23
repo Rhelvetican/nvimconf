@@ -1,5 +1,4 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local lspconfig = require("lspconfig")
 
 capabilities.textDocument = {
 	completion = {
@@ -20,36 +19,26 @@ capabilities.textDocument = {
 	},
 }
 
-lspconfig.clangd.setup({})
-lspconfig.taplo.setup({})
-lspconfig.lua_ls.setup({})
-lspconfig.harper_ls.setup({
-	filetypes = {
-		"c",
-		"cpp",
-		"cs",
-		"gitcommit",
-		"go",
-		"html",
-		"java",
-		"javascript",
-		"lua",
-		"markdown",
-		"nix",
-		"python",
-		"ruby",
-		"rust",
-		"swift",
-		"toml",
-		"typescript",
-		"typescriptreact",
-		"haskell",
-		"cmake",
-		"text",
-	},
-})
+local M = {}
+local servers = {}
 
-lspconfig.basedpyright.setup({
+servers.clangd = {
+	capabilities = capabilities,
+}
+
+servers.taplo = {
+	capabilities = capabilities,
+}
+
+servers.lua_ls = {
+	capabilities = capabilities,
+}
+
+servers.harper_ls = {
+	capabilities = capabilities,
+}
+
+servers.basedpyright = {
 	settings = {
 		basedpyright = {
 			disableOrganizeImports = false,
@@ -68,10 +57,14 @@ lspconfig.basedpyright.setup({
 		},
 	},
 	capabilities = capabilities,
-})
+}
 
-lspconfig.ruff.setup({
+servers.ruff = {
 	on_attach = function(client, _)
 		client.server_capabilities.hoverProvider = false
 	end,
-})
+}
+
+M.servers = servers
+
+return M
